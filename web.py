@@ -92,9 +92,9 @@ def main():
 
                 # Show Lofi converted audio
                 st.write("Lofi Converted Audio (Preview)")
-                st.audio(music.msc_to_mp3_inf(output_file), format="audio/mp3")
+                st.audio(music.msc_to_mp3_inf(output_file), format="audio/wav")
 
-                st.download_button("Download MP3", music.msc_to_mp3_inf(output_file), song_name+"_lofi.mp3")
+                st.download_button("Download MP3", music.msc_to_mp3_inf(output_file), song_name+"_lofi.wav")
     except:
         print("Error occcored in main fxn")
         st.warning("Error Try again")
