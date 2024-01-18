@@ -63,9 +63,13 @@ def main():
     st.info("New and improved website is development")
 
     st.info("Tip: Use Headphone for best experience :headphones:")
-    youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau - Ai muon nghe
     try:
         if youtube_link:
+            # Download YouTube audio and process
+            audio_file, mp3_base_file, song_name = download_youtube_audio(youtube_link)
+            wav_file = os.path.splitext(audio_file)[0] + '.wav'
+            convert_to_wav(audio_file, wav_file)
             # Download audio from YouTube link and save as a WAV file (using cached function)
             d = download_youtube_audio(youtube_link)
             print(f"Retreaving YouTube link: {youtube_link}")
@@ -81,11 +85,17 @@ def main():
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
                 # Process audio with slowedreverb function
-                output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
-                print(f"User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
-                music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
+                output_file = os.path.splitext(wav_file)[0] + "_lofi.wav"
+                slowedreverb(wav_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
+
+                #output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
+                #print(f"User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
+                #music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
                 # Show Lofi converted audio
+                # Stream the processed file
+                st.audio(stream_to_wav(output_file), format="audio/wav")
+                
                 st.write("Lofi Converted Audio (Preview)")
                 st.audio(music.msc_to_mp3_inf(output_file), format="audio/mp3")
 
