@@ -87,17 +87,17 @@ def main():
                 # Process audio with slowedreverb function
                 output_file = os.path.splitext(wav_file)[0] + "_lofi.wav"
                 slowedreverb(wav_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
-
+                st.audio(stream_to_wav(output_file), format="audio/wav")
                 #output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
                 #print(f"User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
                 #music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
                 # Show Lofi converted audio
                 # Stream the processed file
-                st.audio(stream_to_wav(output_file), format="audio/wav")
+                
                 
                 st.write("Lofi Converted Audio (Preview)")
-                st.audio(music.msc_to_mp3_inf(output_file), format="audio/mp3")
+                #st.audio(music.msc_to_mp3_inf(output_file), format="audio/mp3")
 
                 st.download_button("Download MP3", music.msc_to_mp3_inf(output_file), song_name+"_lofi.mp3")
     except:
