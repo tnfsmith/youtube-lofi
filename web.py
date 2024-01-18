@@ -72,33 +72,31 @@ def main():
     try:
         if youtube_link:
             d = download_youtube_audio(youtube_link)
-            if d is not None:
+            if d:
                 audio_file, mp3_base_file, song_name = d
                 st.write("Original Audio")
                 st.audio(mp3_base_file, format="audio/mp3")
 
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
-                # Convert the downloaded file to WAV format
+                # Convert downloaded file to WAV format
                 wav_file = os.path.splitext(audio_file)[0] + '.wav'
-                music.convert_to_wav(audio_file, wav_file)  # Ensure this function is defined in music.py
+                music.convert_to_wav(audio_file, wav_file)
 
                 # Apply slowedreverb effect
                 output_file = os.path.splitext(wav_file)[0] + "_lofi.wav"
                 music.slowedreverb(wav_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
-                # Convert the processed WAV file to MP3
+                # Convert processed WAV to MP3
                 output_mp3 = os.path.splitext(output_file)[0] + ".mp3"
-                music.convert_to_mp3_with_reverb(output_file, output_mp3, selected_bitrate)  # Ensure this function is updated in music.py
+                music.convert_to_mp3_with_reverb(output_file, output_mp3, selected_bitrate)
 
-                # Show Lofi converted audio
                 st.write("Lofi Converted Audio (Preview)")
                 st.audio(output_mp3, format="audio/mp3")
 
-                # Download button for the MP3 file
                 st.download_button("Download MP3", output_mp3, song_name + "_lofi.mp3")
-    except:
-        print("Error occcored in main fxn")
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
         st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
