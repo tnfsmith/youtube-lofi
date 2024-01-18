@@ -95,8 +95,8 @@ def main():
                 st.audio(output_mp3, format="audio/mp3")
 
                 st.download_button("Download MP3", output_mp3, song_name + "_lofi.mp3")
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
         st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
