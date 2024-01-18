@@ -80,6 +80,7 @@ def main():
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
                 # Convert downloaded file to WAV format
+                # Convert downloaded file to WAV format
                 wav_file = os.path.splitext(audio_file)[0] + '.wav'
                 music.convert_to_wav(audio_file, wav_file)
 
@@ -89,7 +90,7 @@ def main():
 
                 # Convert processed WAV to MP3
                 output_mp3 = os.path.splitext(output_file)[0] + ".mp3"
-                music.convert_to_mp3_with_reverb(output_file, output_mp3, selected_bitrate)
+                music.convert_to_mp3(output_file, output_mp3, selected_bitrate)
 
                 st.write("Lofi Converted Audio (Preview)")
                 st.audio(output_mp3, format="audio/mp3")
