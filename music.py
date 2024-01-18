@@ -4,17 +4,7 @@ from pedalboard import Pedalboard, Reverb
 from math import trunc
 import numpy as np
 import sys
-
-def convert_to_wav(input_file, output_file):
-    if input_file.endswith('.wav'):
-        shutil.copy(input_file, output_file)
-    else:
-        command = f'ffmpeg -i "{input_file}" "{output_file}"'
-        sp.call(command, shell=True)
- def convert_to_mp3(input_file, output_file, bitrate):
-    command = f'ffmpeg -i "{input_file}" -codec:a libmp3lame -b:a {bitrate} "{output_file}"'
-    sp.call(command, shell=True)
-       
+      
 def slowedreverb(audio, output, room_size = 0.75, damping = 0.5, wet_level = 0.08, dry_level = 0.2, delay = 2, slowfactor = 0.08):
 
     if '.wav' not in audio:
