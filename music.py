@@ -37,6 +37,11 @@ def slowedreverb(audio, output, room_size = 0.75, damping = 0.5, wet_level = 0.0
     sf.write(output, combined_signal, sample_rate)
     # print(f"Converted.")
 
+def convert_to_mp3(input_file, output_file, bitrate='320k'):
+    command = f'ffmpeg -i "{input_file}" -codec:a libmp3lame -b:a {bitrate} "{output_file}"'
+    sp.call(command, shell=True)
+
+
 def wav_to_mp3(wav_file, mp3_file):
     command = f'ffmpeg -hide_banner -loglevel error -y -i "{wav_file}" -codec:a libmp3lame -b:a 320k "{mp3_file}"'
     sp.call(command, shell=True)
