@@ -71,35 +71,32 @@ def main():
     #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
     try:
         if youtube_link:
-            # Download audio from YouTube link and save as a WAV file (using cached function)
             d = download_youtube_audio(youtube_link)
-            print(f"Retreaving YouTube link: {youtube_link}")
             if d is not None:
                 audio_file, mp3_base_file, song_name = d
-
-
-                # Show original audio
                 st.write("Original Audio")
                 st.audio(mp3_base_file, format="audio/mp3")
 
-                # Get user settings for slowedreverb function
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
-                # Process audio with slowedreverb function
-                
-                # Pass the selected bitrate to the conversion function
-                output_mp3 = "output_file.mp3"
-                music.convert_to_mp3_with_reverb(wav_file, output_mp3, selected_bitrate)
-                
-                output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
-                print(f"User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
-                music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
+                # Convert the downloaded file to WAV format
+                wav_file = os.path.splitext(audio_file)[0] + '.wav'
+                music.convert_to_wav(audio_file, wav_file)  # Ensure this function is defined in music.py
+
+                # Apply slowedreverb effect
+                output_file = os.path.splitext(wav_file)[0] + "_lofi.wav"
+                music.slowedreverb(wav_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
+
+                # Convert the processed WAV file to MP3
+                output_mp3 = os.path.splitext(output_file)[0] + ".mp3"
+                music.convert_to_mp3_with_reverb(output_file, output_mp3, selected_bitrate)  # Ensure this function is updated in music.py
 
                 # Show Lofi converted audio
                 st.write("Lofi Converted Audio (Preview)")
-                st.audio(music.msc_to_mp3_inf(output_file), format="audio/mp3")
+                st.audio(output_mp3, format="audio/mp3")
 
-                st.download_button("Download MP3", music.msc_to_mp3_inf(output_file), song_name+"_lofi.mp3")
+                # Download button for the MP3 file
+                st.download_button("Download MP3", output_mp3, song_name + "_lofi.mp3")
     except:
         print("Error occcored in main fxn")
         st.warning("Error Try again")
