@@ -1,7 +1,6 @@
 import os
 import streamlit as st
 import music
-import sys
 import yt_dlp
 import uuid
 from streamlit.components.v1 import html, components
@@ -72,33 +71,32 @@ def main():
     #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
     try:
         if youtube_link:
+            # Download audio from YouTube link and save as a WAV file (using cached function)
             d = download_youtube_audio(youtube_link)
-            if d:
+            print(f"Retreaving YouTube link: {youtube_link}")
+            if d is not None:
                 audio_file, mp3_base_file, song_name = d
+
+
+                # Show original audio
                 st.write("Original Audio")
                 st.audio(mp3_base_file, format="audio/mp3")
 
+                # Get user settings for slowedreverb function
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
-                # Convert downloaded file to WAV format
-                # Convert downloaded file to WAV format
-                wav_file = os.path.splitext(audio_file)[0] + '.wav'
-                music.convert_to_wav(audio_file, wav_file)
+                # Process audio with slowedreverb function
+                output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
+                print(f"User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
+                music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
-                # Apply slowedreverb effect
-                output_file = os.path.splitext(wav_file)[0] + "_lofi.wav"
-                music.slowedreverb(wav_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
-
-                # Convert processed WAV to MP3
-                output_mp3 = os.path.splitext(output_file)[0] + ".mp3"
-                music.convert_to_mp3(output_file, output_mp3, selected_bitrate)
-
+                # Show Lofi converted audio
                 st.write("Lofi Converted Audio (Preview)")
-                st.audio(output_mp3, format="audio/mp3")
+                st.audio(music.msc_to_mp3_inf(output_file), format="audio/mp3")
 
-                st.download_button("Download MP3", output_mp3, song_name + "_lofi.mp3")
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
+                st.download_button("Download MP3", music.msc_to_mp3_inf(output_file), song_name+"_lofi.mp3")
+    except:
+        print("Error occcored in main fxn")
         st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
