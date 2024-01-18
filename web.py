@@ -61,9 +61,14 @@ def main():
     
     st.title(":microphone: Lofi Converter")
     st.info("New and improved website is development")
-
     st.info("Tip: Use Headphone for best experience :headphones:")
-    youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
+
+    # Select bitrate
+    bitrate_options = ['128k', '192k', '256k', '320k']
+    selected_bitrate = st.selectbox("Select MP3 Bitrate:", bitrate_options, index=3)  # Default to highest quality
+
+    youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8")
+    #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
     try:
         if youtube_link:
             # Download audio from YouTube link and save as a WAV file (using cached function)
@@ -81,6 +86,11 @@ def main():
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
                 # Process audio with slowedreverb function
+                
+                # Pass the selected bitrate to the conversion function
+                output_mp3 = "output_file.mp3"
+                music.convert_to_mp3_with_reverb(wav_file, output_mp3, selected_bitrate)
+                
                 output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
                 print(f"User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
                 music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
