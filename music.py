@@ -3,6 +3,7 @@ import soundfile as sf
 from pedalboard import Pedalboard, Reverb
 from math import trunc
 import numpy as np
+import sys
 
 def convert_to_wav(input_file, output_file):
     if input_file.endswith('.wav'):
