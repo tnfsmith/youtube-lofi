@@ -117,7 +117,7 @@ def main():
                     st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
         except:
                 print("Error occcored in code")
-                st.warning("Error Try again")
+                    st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
     st.markdown("""
