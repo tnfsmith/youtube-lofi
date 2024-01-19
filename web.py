@@ -64,8 +64,8 @@ def main():
     #st.info("Tip: Use Headphone for best experience :headphones:")
 
     # Select bitrate
-    bitrate_options = ['192k', '256k', '320k']
-    selected_bitrate = st.selectbox("🎧 Select MP3 Bitrate: 🎧", bitrate_options, index=2)  # Default to highest quality
+    #bitrate_options = ['192k', '256k', '320k']
+    #selected_bitrate = st.selectbox("🎧 Select MP3 Bitrate: 🎧", bitrate_options, index=2)  # Default to highest quality
 
     with st.form(key='youtube_link_form'):
             youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example this URL Ai muốn nghe không - Đen Vâu https://www.youtube.com/watch?v=JxBnLmCOEJ8", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8")
