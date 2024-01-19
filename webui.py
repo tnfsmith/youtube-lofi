@@ -104,10 +104,20 @@ def main():
             st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
             st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
 
-# ... [Footer and other components]
+
 def get_user_settings():
     # ... [Function to get user settings for reverb]
+    advanced_expander = st.expander("🎼 Advanced Settings 👏")
+    with advanced_expander:
+        st.write("Adjust the parameters for the slowedreverb function:")
+        room_size = st.slider("Reverb Room Size", min_value=0.1, max_value=1.0, value=0.75, step=0.1)
+        damping = st.slider("Reverb Damping", min_value=0.1, max_value=1.0, value=0.5, step=0.1)
+        wet_level = st.slider("Reverb Wet Level", min_value=0.0, max_value=1.0, value=0.08, step=0.01)
+        dry_level = st.slider("Reverb Dry Level", min_value=0.0, max_value=1.0, value=0.2, step=0.01)
+        delay = st.slider("Delay (ms)", min_value=0, max_value=20, value=2)
+        slow_factor = st.slider("Slow Factor", min_value=0.0, max_value=0.2, value=0.08, step=0.01)
     return room_size, damping, wet_level, dry_level, delay, slow_factor
+
     # Footer and BuyMeACoffee button
     st.markdown("""
             <h10 style="text-align: center; position: fixed; bottom: 3rem;">Developed <a href='https://lequocthai.com'>Lê Quốc Thái</a> | <a href='mailto:lequocthai@gmail.com'>lequocthai[at]gmail.com</a> | <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a> </h10>""",
