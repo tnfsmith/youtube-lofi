@@ -81,6 +81,7 @@ def main():
 
     if submit_button and youtube_link:
         duration = 0  # Initialize duration
+        d = None  # Initialize 'd' to ensure it's defined
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
             # Check if the audio is already processed and stored in session state
             if 'processed_audio' in st.session_state and youtube_link == st.session_state['youtube_link']:
