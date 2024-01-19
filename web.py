@@ -71,7 +71,7 @@ def main():
             youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example this URL Ai muốn nghe không - Đen Vâu https://www.youtube.com/watch?v=JxBnLmCOEJ8", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8")
             #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
             #process_button = st.button("Process Audio")
-            submit_button = st.form_submit_button(label='💯 Process Audio')
+            submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
 
     if submit_button and youtube_link:
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
