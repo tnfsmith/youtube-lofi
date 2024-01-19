@@ -79,7 +79,12 @@ def main():
             print(f"Retreaving YouTube link: {youtube_link}")
             if d is not None:
                 audio_file, mp3_base_file, song_name = d
-
+                st.download_button(
+                    label="💾 Download Original Youtube Audio 🎵",
+                    data=mp3_base_file,
+                    file_name=f"{song_name}.mp3",
+                    mime="audio/mp3"
+                )
                 # Show original audio
                 st.write("🎶 Original Downloaded Youtube Audio (.wav). Click play button to listen:")
 
