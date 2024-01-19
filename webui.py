@@ -115,9 +115,10 @@ def main():
                     st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
                 else:
                     st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
-        except:
-                print("Error occcored in code")
-                st.warning("Error Try again")
+        except Exception as e:
+               st.error(f"An error occurred: {e}")
+                #print("Error occcored in code")
+                #st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
     st.markdown("""
