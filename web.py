@@ -91,10 +91,10 @@ def main():
                 music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
                 # Show Lofi converted audio
-                st.write("Lofi Converted Audio (Preview)")
-                st.audio(music.msc_to_mp3_inf(output_file), format="audio/wav") #audio/mp3
+                st.write("Youtube Audio Lofi Converted Audio (Preview)")
+                st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
 
-                st.download_button("Download MP3", music.msc_to_mp3_inf(output_file), song_name+"_lofi.wav") #_lofi.mp3
+                st.download_button("Download Lossless Audio", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
     except:
         print("Error occcored in main fxn")
         st.warning("Error Try again")
