@@ -67,10 +67,11 @@ def main():
     bitrate_options = ['128k', '192k', '256k', '320k']
     selected_bitrate = st.selectbox("🎧 Select MP3 Bitrate: 🎧", bitrate_options, index=3)  # Default to highest quality
 
-    youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example this URL Ai muốn nghe không - Đen Vâu https://www.youtube.com/watch?v=JxBnLmCOEJ8", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8")
-    #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
-    #process_button = st.button("Process Audio")
-    submit_button = st.form_submit_button(label='Process Audio')
+    with st.form(key='youtube_link_form'):
+            youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example this URL Ai muốn nghe không - Đen Vâu https://www.youtube.com/watch?v=JxBnLmCOEJ8", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8")
+            #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
+            #process_button = st.button("Process Audio")
+            submit_button = st.form_submit_button(label='Process Audio')
     try:
         if process_button and youtube_link:
             # Download audio from YouTube link and save as a WAV file (using cached function)
