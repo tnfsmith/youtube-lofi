@@ -66,14 +66,15 @@ def main():
     # Select bitrate
     bitrate_options = ['128k', '192k', '256k', '320k']
     selected_bitrate = st.selectbox("🎧 Select MP3 Bitrate: 🎧", bitrate_options, index=3)  # Default to highest quality
-with st.form(key='youtube_link_form'):
+    
+    with st.form(key='youtube_link_form'):
             youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example this URL Ai muốn nghe không - Đen Vâu https://www.youtube.com/watch?v=JxBnLmCOEJ8", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8")
             #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
             #process_button = st.button("Process Audio")
             submit_button = st.form_submit_button(label='Process Audio')
-    try:
-        if submit_button and youtube_link:
-            # Download audio from YouTube link and save as a WAV file (using cached function)
+
+    if submit_button and youtube_link:
+        try:   # Download audio from YouTube link and save as a WAV file (using cached function)
             d = download_youtube_audio(youtube_link)
             print(f"Retreaving YouTube link: {youtube_link}")
             if d is not None:
@@ -105,9 +106,9 @@ with st.form(key='youtube_link_form'):
                 st.info (":fire::fire::fire:Note: Due to Select MP3 Bitrate above and original Youtube Audio support, audio quality after converted may depend on it :smile:")
                 st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
                 
-    except:
-        print("Error occcored in code")
-        st.warning("Error Try again")
+        except:
+                print("Error occcored in code")
+                st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
     st.markdown("""
