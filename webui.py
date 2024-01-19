@@ -15,8 +15,9 @@ def delete_temp_files(audio_file, output_file, mp3_file):
 
 
 @st.cache_data(show_spinner=False, max_entries=5)
-duration = 0  # Initialize duration
+
 def isDownlaodable(youtube_link):
+    duration = 0  # Initialize duration
     try:
         with yt_dlp.YoutubeDL({'format': 'bestaudio', "quiet":True, "noplaylist":True}) as ydl:
             dur = None
