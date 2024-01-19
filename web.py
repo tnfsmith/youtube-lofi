@@ -94,8 +94,8 @@ def main():
                 st.write("Youtube Audio Lofi Converted Audio (Listenning Preview Below)")
                 st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
                 
-                st.info (":fire:Note: Due to Select MP3 Bitrate above and original Youtube Audio support, audio quality after converted may depend on it :smile:")
-                st.download_button("Download Lossless Audio", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
+                st.info (":fire::fire::fire:Note: Due to Select MP3 Bitrate above and original Youtube Audio support, audio quality after converted may depend on it :smile:")
+                st.download_button(":download:Download Lossless Audio (.flac)", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
                 
     except:
         print("Error occcored in code")
