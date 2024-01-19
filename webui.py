@@ -30,10 +30,10 @@ def isDownlaodable(youtube_link):
         st.error(e)
         print(f"ERROR: {e} ==> {youtube_link}")
         return False
-    if dur <= 1200: #600
+    if dur <= 12000: #600
         return True
     else:
-        st.error("Make sure Youtube song less than 20 minutes")
+        st.error("Make sure Youtube song less than 200 minutes (about 3.33 hours)")
         return False
 
 # Function to download YouTube audio and save as a WAV file
