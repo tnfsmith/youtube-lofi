@@ -132,9 +132,9 @@ def main():
             st.session_state.processed_audio = music.msc_to_mp3_inf(output_file)
             st.session_state.processed_audio_file_name = f"{song_name}_lofi.flac"
         except Exception as e:
-                st.error(f"An error occurred: {e}")
+               st.error(f"An error occurred: {e}")
                 #print("Error occcored in code")
-         st.warning("Error Try again")
+        st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
     st.markdown("""
