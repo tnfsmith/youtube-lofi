@@ -118,7 +118,7 @@ def main():
         except Exception as e:
                st.error(f"An error occurred: {e}")
                 #print("Error occcored in code")
-                #st.warning("Error Try again")
+            st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
     st.markdown("""
