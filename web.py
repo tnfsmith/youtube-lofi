@@ -83,7 +83,7 @@ def main():
                 st.audio(mp3_base_file, format="audio/mp3")
                 # Download button for the original audio
                 st.download_button(
-                    label="Download Original Audio",
+                    label="💾 Download Original Youtube Audio 🎵",
                     data=mp3_base_file,
                     file_name=f"{song_name}.mp3",
                     mime="audio/mp3"
