@@ -56,7 +56,11 @@ def download_youtube_audio(youtube_link):
                 st.error("Error")
                 print(f"ERROR: {e} ==> {youtube_link} in download_youtube_audio")
         return None
-
+# Initialize session state variables if they don't exist
+        if 'processed_audio' not in st.session_state:
+           st.session_state.processed_audio = None
+        if 'processed_audio_file_name' not in st.session_state:
+           st.session_state.processed_audio_file_name = ''
 # Main function for the web app
 def main():
     st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide", )
@@ -77,11 +81,7 @@ def main():
 
         
     if submit_button and youtube_link:
-        # Initialize session state variables if they don't exist
-        if 'processed_audio' not in st.session_state:
-           st.session_state.processed_audio = None
-        if 'processed_audio_file_name' not in st.session_state:
-           st.session_state.processed_audio_file_name = ''
+        
         duration = 0  # Initialize duration
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
             d = download_youtube_audio(youtube_link)
