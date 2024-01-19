@@ -88,7 +88,7 @@ def main():
                 # Download button for the original audio mp3 before convert to.wav file
                 st.session_state['processed_data'] = (audio_file, mp3_base_file, song_name)
             else:
-                if st.session_state['processed_data']:
+             if st.session_state['processed_data']:
                    audio_file, mp3_base_file, song_name = st.session_state['processed_data']
             if  st.session_state['processed_data']:    
                 st.download_button(
