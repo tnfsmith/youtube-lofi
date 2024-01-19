@@ -78,7 +78,7 @@ def main():
                 audio_file, mp3_base_file, song_name = d
 
                 # Create two columns for the text and the download button
-                col1, col2 = st.columns([3, 1])  # Adjust the ratio as needed
+                col1, col2 = st.columns([4, 1])  # Adjust the ratio as needed
 
                 # Place the text in the first column
                 with col1:
@@ -96,6 +96,8 @@ def main():
 
                 # Place the audio player below the columns
                 st.audio(mp3_base_file, format="audio/mp3")
+
+
 
                 # Show original audio
                 #st.write("🎶 Original Downloaded Youtube Audio (.wav)")
