@@ -85,7 +85,7 @@ def main():
                 #)
 
                 # Display the audio player
-                st.audio(mp3_base_file, format="audio/mp3")
+                #st.audio(mp3_base_file, format="audio/mp3")
 
                 # Show original audio
                 st.write("🎶 Original Downloaded Youtube Audio (.wav)")
