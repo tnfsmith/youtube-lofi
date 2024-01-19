@@ -93,8 +93,8 @@ def main():
 
         # Get user settings for slowedreverb function
         room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
-
-        if st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor):
+        duration =0
+        if  st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor) and duration <=1200:
             st.session_state.reverb_settings = (room_size, damping, wet_level, dry_level, delay, slow_factor)
             # Process audio with slowedreverb function
             output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
@@ -105,9 +105,11 @@ def main():
             st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
 
 # ... [Footer and other components]
-def get_user_settings():
-    # ... [Function to get user settings for reverb]
-    return room_size, damping, wet_level, dry_level, delay, slow_factor
+# Function to get video duration
+def get_video_duration(youtube_link):
+    with yt_dlp.YoutubeDL({'quiet': True, "noplaylist": True}) as ydl:
+        info_dict = ydl.extract_info(youtube_link, download=False)
+        return info_dict.get('duration', 0)
     # Footer and BuyMeACoffee button
     st.markdown("""
             <h10 style="text-align: center; position: fixed; bottom: 3rem;">Developed <a href='https://lequocthai.com'>Lê Quốc Thái</a> | <a href='mailto:lequocthai@gmail.com'>lequocthai[at]gmail.com</a> | <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a> </h10>""",
