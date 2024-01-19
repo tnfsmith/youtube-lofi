@@ -73,16 +73,20 @@ def main():
     with st.form(key='youtube_link_form'):
         youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example URL below Ai muốn nghe không - Đen Vâu", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8", help="Example this URL Ai muốn nghe không - Đen Vâu")
         submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
+     # Get user settings for slowedreverb function
+    room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
     if submit_button and youtube_link:
         # Process audio and store in session state
         d = download_youtube_audio(youtube_link)
         if d:
             audio_file, mp3_base_file, song_name = d
-            st.session_state.audio_data = (audio_file, mp3_base_file, song_name)
+            #st.session_state.audio_data = (audio_file, mp3_base_file, song_name)
+            st.session_state.audio_data = (audio_file, mp3_base_file, song_name, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
     if st.session_state.audio_data:
-        audio_file, mp3_base_file, song_name = st.session_state.audio_data
+        #audio_file, mp3_base_file, song_name = st.session_state.audio_data
+        audio_file, mp3_base_file, song_name, *settings = st.session_state.audio_data
         st.download_button(
             label="💾 Download Original Youtube Audio 🎵",
             data=mp3_base_file,
@@ -92,31 +96,17 @@ def main():
         st.audio(mp3_base_file, format="audio/mp3")
 
         # Get user settings for slowedreverb function
-        room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
+        #room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
-        if st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor):
-            st.session_state.reverb_settings = (room_size, damping, wet_level, dry_level, delay, slow_factor)
+        if st.session_state.settings != settings:
             # Process audio with slowedreverb function
             output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
             music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
             st.write("🎶 Youtube Audio Lofi Converted Audio (🔉 Listening Preview Below)")
-            st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
-            st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
-
-
-def get_user_settings():
-    # ... [Function to get user settings for reverb]
-    advanced_expander = st.expander("🎼 Advanced Settings 👏")
-    with advanced_expander:
-        st.write("Adjust the parameters for the slowedreverb function:")
-        room_size = st.slider("Reverb Room Size", min_value=0.1, max_value=1.0, value=0.75, step=0.1)
-        damping = st.slider("Reverb Damping", min_value=0.1, max_value=1.0, value=0.5, step=0.1)
-        wet_level = st.slider("Reverb Wet Level", min_value=0.0, max_value=1.0, value=0.08, step=0.01)
-        dry_level = st.slider("Reverb Dry Level", min_value=0.0, max_value=1.0, value=0.2, step=0.01)
-        delay = st.slider("Delay (ms)", min_value=0, max_value=20, value=2)
-        slow_factor = st.slider("Slow Factor", min_value=0.0, max_value=0.2, value=0.08, step=0.01)
-    return room_size, damping, wet_level, dry_level, delay, slow_factor
+            st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac")
+            st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac")
+            st.session_state.settings = settings
 
     # Footer and BuyMeACoffee button
     st.markdown("""
