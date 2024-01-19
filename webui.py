@@ -17,7 +17,7 @@ def delete_temp_files(audio_file, output_file, mp3_file):
 @st.cache_data(show_spinner=False, max_entries=5)
 
 def isDownlaodable(youtube_link):
-    duration = 0  # Initialize duration
+    
     try:
         with yt_dlp.YoutubeDL({'format': 'bestaudio', "quiet":True, "noplaylist":True}) as ydl:
             dur = None
@@ -75,9 +75,10 @@ def main():
             #process_button = st.button("Process Audio")
             submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
 
-    #duration = 0  # Initialize duration
+    
 
     if submit_button and youtube_link:
+        duration = 0  # Initialize duration
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
             d = download_youtube_audio(youtube_link)
             print(f"Retreaving YouTube link: {youtube_link}")
