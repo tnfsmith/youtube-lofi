@@ -5,10 +5,10 @@ from math import trunc
 import numpy as np
 import sys
       
-def slowedreverb(audio, output, room_size = 0.75, damping = 0.5, wet_level = 0.08, dry_level = 0.2, delay = 2, slowfactor = 0.08):
+def slowedreverb(audio, output, room_size = 0.7, damping = 0.5, wet_level = 0.08, dry_level = 0.2, delay = 2, slowfactor = 0.08):
 
     if '.wav' not in audio:
-        # print('Audio needs to be .wav! Converting...')
+        print('Audio needs to be .wav! Converting...')
         sp.call(f'ffmpeg -hide_banner -loglevel error -y -i "{audio}" tmp.wav', shell = True)
         audio = 'tmp.wav'
         
@@ -35,7 +35,7 @@ def slowedreverb(audio, output, room_size = 0.75, damping = 0.5, wet_level = 0.0
 
     #write outfile
     sf.write(output, combined_signal, sample_rate)
-    # print(f"Converted.")
+    print(f"Converted.")
 
 def convert_to_mp3(input_file, output_file, bitrate='320k'):
     command = f'ffmpeg -i "{input_file}" -codec:a libmp3lame -b:a {bitrate} "{output_file}"'
