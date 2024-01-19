@@ -87,7 +87,7 @@ def main():
                     file_name=f"{song_name}.mp3",
                     mime="audio/mp3"
                 )
-                st.markdown(f"🎶 Original Downloaded Youtube Audio (.wav) [💾 Download]({mp3_base_file})")
+                
                 # Get user settings for slowedreverb function
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
