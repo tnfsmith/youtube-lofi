@@ -85,11 +85,11 @@ def main():
             else:
             # Process the audio and store it in the session state
                d = download_youtube_audio(youtube_link)
-            if d is not None:
-                audio_file, mp3_base_file, song_name = d
-                st.session_state['processed_audio'] = (audio_file, mp3_base_file, song_name)
-                st.session_state['youtube_link'] = youtube_link
-               d = download_youtube_audio(youtube_link)
+               if d is not None:
+                    audio_file, mp3_base_file, song_name = d
+                    st.session_state['processed_audio'] = (audio_file, mp3_base_file, song_name)
+                    st.session_state['youtube_link'] = youtube_link
+            #   d = download_youtube_audio(youtube_link)
             print(f"Retreaving YouTube link: {youtube_link}")
             if d is not None:
                 audio_file, mp3_base_file, song_name = d
