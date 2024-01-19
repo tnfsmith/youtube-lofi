@@ -93,9 +93,10 @@ def main():
                 # Show Lofi converted audio
                 st.write("Youtube Audio Lofi Converted Audio (Listenning Preview Below)")
                 st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
-
+                
+                st.info ("Note: Due to user select bitrate in original Youtube Audio support, quality after converted may depend on it.")
                 st.download_button("Download Lossless Audio", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
-                st.info("Note: Due to user select bitrate in original Youtube Audio support, quality after converted may depend on it.")
+                
     except:
         print("Error occcored in code")
         st.warning("Error Try again")
