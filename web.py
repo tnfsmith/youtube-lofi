@@ -99,20 +99,22 @@ def main():
                 #)
                 
                 # Get user settings for slowedreverb function
-                room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
+                if duration <=600: # 600 seconds == 10 minutes
+                    room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
-                # Process audio with slowedreverb function
-                output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
-                print(f"🎯 User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
-                music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
+                    # Process audio with slowedreverb function
+                    output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
+                    print(f"🎯 User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
+                    music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
-                # Show Lofi converted audio
-                st.write("🎶 Youtube Audio Lofi Converted Audio (🔉 Listenning Preview Below)")
-                st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
-                
-                st.info (":fire::fire::fire:Note: Due to original Youtube Audio support, audio quality after converted may depend on it :smile:")
-                st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
-                
+                    # Show Lofi converted audio
+                    st.write("🎶 Youtube Audio Lofi Converted Audio (🔉 Listenning Preview Below)")
+                    st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
+                    
+                    st.info (":fire::fire::fire:Note: Due to original Youtube Audio support, audio quality after converted may depend on it :smile:")
+                    st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
+                else:
+                    st.info("The video is longer than 10 minutes. Reverb processing is skipped.")
         except:
                 print("Error occcored in code")
                 st.warning("Error Try again")
