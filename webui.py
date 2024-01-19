@@ -15,6 +15,7 @@ def delete_temp_files(audio_file, output_file, mp3_file):
 
 
 @st.cache_data(show_spinner=False, max_entries=5)
+duration = 0  # Initialize duration
 def isDownlaodable(youtube_link):
     try:
         with yt_dlp.YoutubeDL({'format': 'bestaudio', "quiet":True, "noplaylist":True}) as ydl:
@@ -72,6 +73,8 @@ def main():
             #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
             #process_button = st.button("Process Audio")
             submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
+
+    #duration = 0  # Initialize duration
 
     if submit_button and youtube_link:
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
