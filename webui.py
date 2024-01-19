@@ -75,16 +75,11 @@ def main():
             #process_button = st.button("Process Audio")
             submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
 
-        
+    
+
     if submit_button and youtube_link:
-        
-            duration = 0  # Initialize duration
+        duration = 0  # Initialize duration
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
-            # Initialize session state variables if they don't exist
-            if 'processed_audio' not in st.session_state:
-               st.session_state.processed_audio = None
-            if 'processed_audio_file_name' not in st.session_state:
-               st.session_state.processed_audio_file_name = ''
             d = download_youtube_audio(youtube_link)
             print(f"Retreaving YouTube link: {youtube_link}")
             if d is not None:
@@ -109,12 +104,6 @@ def main():
                 #)
                 
                 # Get user settings for slowedreverb function
-                # Initialize session state variables if they don't exist
-                if 'processed_audio' not in st.session_state:
-                    st.session_state.processed_audio = None
-                if 'processed_audio_file_name' not in st.session_state:
-                    st.session_state.processed_audio_file_name = ''
-
                 if duration <=1200: # 1200 seconds == 20 minutes
                     room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
@@ -129,13 +118,8 @@ def main():
                     
                     st.info (":fire::fire::fire:Note: Due to original Youtube Audio support, audio quality after converted may depend on it :smile:")
                     st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
-                    st.session_state.processed_audio = music.msc_to_mp3_inf(output_file)
-                    st.session_state.processed_audio_file_name = f"{song_name}_lofi.flac"
                 else:
                     st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
-                # Once processed, store the result in session state
-            st.session_state.processed_audio = music.msc_to_mp3_inf(output_file)
-            st.session_state.processed_audio_file_name = f"{song_name}_lofi.flac"
         except Exception as e:
                st.error(f"An error occurred: {e}")
                 #print("Error occcored in code")
