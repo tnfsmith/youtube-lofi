@@ -78,8 +78,18 @@ def main():
     if submit_button and youtube_link:
         duration = 0  # Initialize duration
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
-            
-            d = download_youtube_audio(youtube_link)
+            # Check if the audio is already processed and stored in session state
+            if 'processed_audio' in st.session_state and youtube_link == st.session_state['youtube_link']:
+            # Use the processed audio from the session state
+               audio_file, mp3_base_file, song_name = st.session_state['processed_audio']
+            else:
+            # Process the audio and store it in the session state
+               d = download_youtube_audio(youtube_link)
+            if d is not None:
+                audio_file, mp3_base_file, song_name = d
+                st.session_state['processed_audio'] = (audio_file, mp3_base_file, song_name)
+                st.session_state['youtube_link'] = youtube_link
+               d = download_youtube_audio(youtube_link)
             print(f"Retreaving YouTube link: {youtube_link}")
             if d is not None:
                 audio_file, mp3_base_file, song_name = d
@@ -123,9 +133,9 @@ def main():
                 # Once processed, store the result in session state
             
         except Exception as e:
-               st.error(f"An error occurred: {e}")
+         st.error(f"An error occurred: {e}")
                 #print("Error occcored in code")
-        st.warning("Error Try again")
+         st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
     st.markdown("""
@@ -145,7 +155,12 @@ def main():
             """,
             unsafe_allow_html=True,
         )
-
+# Function to get video duration
+def get_video_duration(youtube_link):
+    with yt_dlp.YoutubeDL({'quiet': True, "noplaylist": True}) as ydl:
+        info_dict = ydl.extract_info(youtube_link, download=False)
+        return info_dict.get('duration', 0)
+    
 # Function to get user settings
 def get_user_settings():
     advanced_expander = st.expander("🎼 Advanced Settings 👏")
