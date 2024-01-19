@@ -77,22 +77,8 @@ def main():
             if d is not None:
                 audio_file, mp3_base_file, song_name = d
 
-                # Show original audio text and download link on the same line
-                #st.markdown(
-                #    f"🎶 Original Downloaded Youtube Audio (.wav) "
-                #    f"[💾 Download]({mp3_base_file})",
-                #    unsafe_allow_html=True
-                #)
-
-                # Display the audio player
-                #st.audio(mp3_base_file, format="audio/mp3")
-                                
-                # Only works if 'mp3_base_file' is a URL
-                # Display the descriptive text
-                st.markdown("🎶 Original Downloaded Youtube Audio (.wav)")
                 # Show original audio
-                #st.write("🎶 Original Downloaded Youtube Audio (.wav)")
-                st.markdown(f"🎶 Original Downloaded Youtube Audio (.wav) [💾 Download]({mp3_base_file})")
+                st.write("🎶 Original Downloaded Youtube Audio (.wav)")
                 st.audio(mp3_base_file, format="audio/mp3")
                 # Download button for the original audio
                 st.download_button(
@@ -101,6 +87,7 @@ def main():
                     file_name=f"{song_name}.mp3",
                     mime="audio/mp3"
                 )
+                st.markdown(f"🎶 Original Downloaded Youtube Audio (.wav) [💾 Download]({mp3_base_file})")
                 # Get user settings for slowedreverb function
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
