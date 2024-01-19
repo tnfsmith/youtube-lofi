@@ -26,14 +26,14 @@ def isDownlaodable(youtube_link):
                     break
 
     except Exception as e:
-        st.error(":yt: Make sure Youtube video is publicly globally avilable!!!")
+        st.error("Make sure Youtube video is publicly globally avilable!!!")
         st.error(e)
         print(f"ERROR: {e} ==> {youtube_link}")
         return False
     if dur <= 600:
         return True
     else:
-        st.error(":yt: Make sure Youtube song less than 10 minutes")
+        st.error("Make sure Youtube song less than 10 minutes")
         return False
 
 # Function to download YouTube audio and save as a WAV file
@@ -47,7 +47,7 @@ def download_youtube_audio(youtube_link):
                 info_dict = ydl.extract_info(youtube_link, download=True)
                 audio_file = ydl.prepare_filename(info_dict)
                 song_name = info_dict['title']
-            print(f":yt: Downloaded YouTube link: {youtube_link} ==> {song_name}")
+            print(f"Downloaded YouTube link: {youtube_link} ==> {song_name}")
             mp3_file_base = music.msc_to_mp3_inf(audio_file)
             return (audio_file, mp3_file_base, song_name)
         except Exception as e:
@@ -59,7 +59,7 @@ def download_youtube_audio(youtube_link):
 def main():
     st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide", )
     
-    st.title(":yt: :microphone: Youtube Audio Lofi Converter (Lossless Audio)")
+    st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
     st.info("New features and improved web UI is still development for best user experience")
     st.info("Tip: Use Headphone for best experience :headphones:")
 
