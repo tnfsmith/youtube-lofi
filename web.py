@@ -79,7 +79,7 @@ def main():
 
 
                 # Show original audio
-                st.write("🎶 Original Audio")
+                st.write("🎶 Original Downloaded Youtube Audio (.wav)")
                 st.audio(mp3_base_file, format="audio/mp3")
 
                 # Get user settings for slowedreverb function
