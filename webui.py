@@ -74,15 +74,15 @@ def main():
             #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
             #process_button = st.button("Process Audio")
             submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
-# Initialize session state variables if they don't exist
-    if 'processed_audio' not in st.session_state:
-           st.session_state.processed_audio = None
-    if 'processed_audio_file_name' not in st.session_state:
-           st.session_state.processed_audio_file_name = ''
+
         
     if submit_button and youtube_link:
-        
-        duration = 0  # Initialize duration
+        # Initialize session state variables if they don't exist
+        if 'processed_audio' not in st.session_state:
+           st.session_state.processed_audio = None
+        if 'processed_audio_file_name' not in st.session_state:
+           st.session_state.processed_audio_file_name = ''
+            duration = 0  # Initialize duration
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
             d = download_youtube_audio(youtube_link)
             print(f"Retreaving YouTube link: {youtube_link}")
