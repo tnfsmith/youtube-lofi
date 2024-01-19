@@ -64,7 +64,11 @@ def main():
     st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
     st.info("🌟 Auto download audio at 320kbps. New features is still development for best user experience. 🎉 Tip: Use Headphone for best experience :headphones:")
     #st.info("Tip: Use Headphone for best experience :headphones:")
-
+    # Initialize session state variables
+    if 'processed_audio' not in st.session_state:
+        st.session_state['processed_audio'] = None
+    if 'youtube_link' not in st.session_state:
+        st.session_state['youtube_link'] = None
     # Select bitrate
     #bitrate_options = ['192k', '256k', '320k']
     #selected_bitrate = st.selectbox("🎧 Select MP3 Bitrate: 🎧", bitrate_options, index=2)  # Default to highest quality
