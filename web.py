@@ -30,10 +30,10 @@ def isDownlaodable(youtube_link):
         st.error(e)
         print(f"ERROR: {e} ==> {youtube_link}")
         return False
-    if dur <= 6000: #600
+    if dur <= 1200: #600
         return True
     else:
-        st.error("Make sure Youtube song less than 100 minutes")
+        st.error("Make sure Youtube song less than 20 minutes")
         return False
 
 # Function to download YouTube audio and save as a WAV file
@@ -99,7 +99,7 @@ def main():
                 #)
                 
                 # Get user settings for slowedreverb function
-                if duration <=600: # 600 seconds == 10 minutes
+                if duration <=1200: # 1200 seconds == 20 minutes
                     room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
                     # Process audio with slowedreverb function
@@ -114,7 +114,7 @@ def main():
                     st.info (":fire::fire::fire:Note: Due to original Youtube Audio support, audio quality after converted may depend on it :smile:")
                     st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
                 else:
-                    st.info("The video is longer than 10 minutes. Reverb processing is skipped.")
+                    st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
         except:
                 print("Error occcored in code")
                 st.warning("Error Try again")
