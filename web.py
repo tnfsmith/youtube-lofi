@@ -60,7 +60,7 @@ def main():
     st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide", )
     
     st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
-    st.info("🌟 New features and improved web UI is still development for best user experience. 🎉 Tip: Use Headphone for best experience :headphones:")
+    st.info("🌟 Auto download 320kbps. New features and improved web UI is still development for best user experience. 🎉 Tip: Use Headphone for best experience :headphones:")
     #st.info("Tip: Use Headphone for best experience :headphones:")
 
     # Select bitrate
@@ -104,7 +104,7 @@ def main():
                 st.write("🎶 Youtube Audio Lofi Converted Audio (🔉 Listenning Preview Below)")
                 st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
                 
-                st.info (":fire::fire::fire:Note: Due to Select MP3 Bitrate above and original Youtube Audio support, audio quality after converted may depend on it :smile:")
+                st.info (":fire::fire::fire:Note: Due to original Youtube Audio support, audio quality after converted may depend on it :smile:")
                 st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
                 
         except:
