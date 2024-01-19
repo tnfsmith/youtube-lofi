@@ -134,7 +134,7 @@ def main():
                     st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
                 # Once processed, store the result in session state
             st.session_state.processed_audio = music.msc_to_mp3_inf(output_file)
-            #st.session_state.processed_audio_file_name = f"{song_name}_lofi.flac"
+            st.session_state.processed_audio_file_name = f"{song_name}_lofi.flac"
         except Exception as e:
                st.error(f"An error occurred: {e}")
                 #print("Error occcored in code")
