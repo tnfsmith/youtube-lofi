@@ -64,11 +64,11 @@ def main():
     st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
     st.info("🌟 Auto download audio at 320kbps. New features are still in development for best user experience. 🎉 Tip: Use Headphones for the best experience :headphones:")
 
-    # Initialize session state
+    # Initialize session state variables
     if 'audio_data' not in st.session_state:
         st.session_state.audio_data = None
-    if 'reverb_settings' not in st.session_state:
-        st.session_state.reverb_settings = None
+    if 'settings' not in st.session_state:
+        st.session_state.settings = None
 
     with st.form(key='youtube_link_form'):
         youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example URL below Ai muốn nghe không - Đen Vâu", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8", help="Example this URL Ai muốn nghe không - Đen Vâu")
