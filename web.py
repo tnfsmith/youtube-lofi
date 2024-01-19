@@ -77,27 +77,15 @@ def main():
             if d is not None:
                 audio_file, mp3_base_file, song_name = d
 
-                # Create two columns for the text and the download button
-                col1, col2 = st.columns([4, 1])  # Adjust the ratio as needed
+                # Show original audio text and download link on the same line
+                st.markdown(
+                    f"🎶 Original Downloaded Youtube Audio (.wav) "
+                    f"[💾 Download]({mp3_base_file})",
+                    unsafe_allow_html=True
+                )
 
-                # Place the text in the first column
-                with col1:
-                    st.write("🎶 Original Downloaded Youtube Audio (.wav)")
-
-                # Place the download button in the second column
-                with col2:
-                    with open(mp3_base_file, "rb") as file:
-                        st.download_button(
-                            label="💾 Download",
-                            data=file.read(),
-                            file_name=f"{song_name}.mp3",
-                            mime="audio/mp3"
-                        )
-
-                # Place the audio player below the columns
+                # Display the audio player
                 st.audio(mp3_base_file, format="audio/mp3")
-
-
 
                 # Show original audio
                 #st.write("🎶 Original Downloaded Youtube Audio (.wav)")
