@@ -67,7 +67,7 @@ def main():
     bitrate_options = ['128k', '192k', '256k', '320k']
     selected_bitrate = st.selectbox("🎧 Select MP3 Bitrate: 🎧", bitrate_options, index=3)  # Default to highest quality
 
-    youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example this song https://www.youtube.com/watch?v=JxBnLmCOEJ8, "https://www.youtube.com/watch?v=JxBnLmCOEJ8")
+    youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example this song https://www.youtube.com/watch?v=JxBnLmCOEJ8", "https://www.youtube.com/watch?v=JxBnLmCOEJ8")
     #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
     try:
         if youtube_link:
