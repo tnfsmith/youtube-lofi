@@ -75,9 +75,9 @@ def main():
             #process_button = st.button("Process Audio")
             submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
 # Initialize session state variables if they don't exist
-        if 'processed_audio' not in st.session_state:
+    if 'processed_audio' not in st.session_state:
            st.session_state.processed_audio = None
-        if 'processed_audio_file_name' not in st.session_state:
+    if 'processed_audio_file_name' not in st.session_state:
            st.session_state.processed_audio_file_name = ''
         
     if submit_button and youtube_link:
