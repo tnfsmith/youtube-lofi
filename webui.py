@@ -64,7 +64,8 @@ def main():
     st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
     st.info("🌟 Auto download audio at 320kbps. New features is still development for best user experience. 🎉 Tip: Use Headphone for best experience :headphones:")
     #st.info("Tip: Use Headphone for best experience :headphones:")
-
+    if 'processed_audio_data' not in st.session_state:
+        st.session_state['processed_audio_data'] = None
     # Select bitrate
     #bitrate_options = ['192k', '256k', '320k']
     #selected_bitrate = st.selectbox("🎧 Select MP3 Bitrate: 🎧", bitrate_options, index=2)  # Default to highest quality
@@ -82,9 +83,14 @@ def main():
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
             d = download_youtube_audio(youtube_link)
             print(f"Retreaving YouTube link: {youtube_link}")
-            if d is not None:
+            if d:
                 audio_file, mp3_base_file, song_name = d
                 # Download button for the original audio mp3 before convert to.wav file
+                st.session_state['processed_data'] = (audio_file, mp3_base_file, song_name)
+            else:
+                if st.session_state['processed_data']:
+                    audio_file, mp3_base_file, song_name = st.session_state['processed_data']
+            if st.session_state['processed_data']:    
                 st.download_button(
                     label="💾 Download Original Youtube Audio 🎵",
                     data=mp3_base_file,
