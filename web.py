@@ -57,9 +57,9 @@ def download_youtube_audio(youtube_link):
 
 # Main function for the web app
 def main():
-    st.set_page_config(page_title="Youtube Audio Lofi Converter (Lossless Audio)", page_icon=":microphone:", layout="wide", )
+    st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide", )
     
-    st.title(":microphone: Youtube Audio Lofi Converter")
+    st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
     st.info("New features and improved web UI is still development for best user experience")
     st.info("Tip: Use Headphone for best experience :headphones:")
 
