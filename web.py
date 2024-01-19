@@ -60,7 +60,7 @@ def main():
     st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide", )
     
     st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
-    st.info("🌟 Auto download audio at 320kbps. New features and improved web UI is still development for best user experience. 🎉 Tip: Use Headphone for best experience :headphones:")
+    st.info("🌟 Auto download audio at 320kbps. New features is still development for best user experience. 🎉 Tip: Use Headphone for best experience :headphones:")
     #st.info("Tip: Use Headphone for best experience :headphones:")
 
     # Select bitrate
