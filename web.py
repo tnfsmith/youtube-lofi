@@ -77,17 +77,36 @@ def main():
             if d is not None:
                 audio_file, mp3_base_file, song_name = d
 
+                # Create two columns for the text and the download button
+                col1, col2 = st.columns([3, 1])  # Adjust the ratio as needed
+
+                # Place the text in the first column
+                with col1:
+                    st.write("🎶 Original Downloaded Youtube Audio (.wav)")
+
+                # Place the download button in the second column
+                with col2:
+                    with open(mp3_base_file, "rb") as file:
+                        st.download_button(
+                            label="💾 Download",
+                            data=file.read(),
+                            file_name=f"{song_name}.mp3",
+                            mime="audio/mp3"
+                        )
+
+                # Place the audio player below the columns
+                st.audio(mp3_base_file, format="audio/mp3")
 
                 # Show original audio
-                st.write("🎶 Original Downloaded Youtube Audio (.wav)")
-                st.audio(mp3_base_file, format="audio/mp3")
+                #st.write("🎶 Original Downloaded Youtube Audio (.wav)")
+                #st.audio(mp3_base_file, format="audio/mp3")
                 # Download button for the original audio
-                st.download_button(
-                    label="💾 Download Original Youtube Audio 🎵",
-                    data=mp3_base_file,
-                    file_name=f"{song_name}.mp3",
-                    mime="audio/mp3"
-                )
+                #st.download_button(
+                #    label="💾 Download Original Youtube Audio 🎵",
+                #    data=mp3_base_file,
+                #    file_name=f"{song_name}.mp3",
+                #    mime="audio/mp3"
+                #)
                 # Get user settings for slowedreverb function
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
