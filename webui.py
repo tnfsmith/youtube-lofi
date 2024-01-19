@@ -49,6 +49,7 @@ def download_youtube_audio(youtube_link):
                 info_dict = ydl.extract_info(youtube_link, download=True)
                 audio_file = ydl.prepare_filename(info_dict)
                 song_name = info_dict['title']
+                duration = info_dict['duration']  # Get the duration
             print(f"Downloaded YouTube link: {youtube_link} ==> {song_name}")
             mp3_file_base = music.msc_to_mp3_inf(audio_file)
             return (audio_file, mp3_file_base, song_name)
@@ -94,7 +95,7 @@ def main():
         # Get user settings for slowedreverb function
         room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
         duration =0
-        if  st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor) :
+        if  st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor) and duration<=1200:
             st.session_state.reverb_settings = (room_size, damping, wet_level, dry_level, delay, slow_factor)
             # Process audio with slowedreverb function
             output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
