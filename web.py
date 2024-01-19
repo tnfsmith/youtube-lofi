@@ -81,7 +81,13 @@ def main():
                 # Show original audio
                 st.write("🎶 Original Downloaded Youtube Audio (.wav)")
                 st.audio(mp3_base_file, format="audio/mp3")
-
+                # Download button for the original audio
+                st.download_button(
+                    label="Download Original Audio",
+                    data=mp3_base_file,
+                    file_name=f"{song_name}.mp3",
+                    mime="audio/mp3"
+                )
                 # Get user settings for slowedreverb function
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
