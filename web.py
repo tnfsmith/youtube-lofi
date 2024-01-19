@@ -100,7 +100,6 @@ def main():
         st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
-    # Footer and BuyMeACoffee button
 st.markdown("""
         <h10 style="text-align: center; position: fixed; bottom: 3rem;">Developed <a href='https://lequocthai.com'>Lê Quốc Thái</a> | <a href='mailto:lequocthai@gmail.com'>lequocthai[at]gmail.com</a> | <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a> </h10>""",
         unsafe_allow_html=True)
