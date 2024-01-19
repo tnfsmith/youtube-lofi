@@ -59,7 +59,7 @@ def download_youtube_audio(youtube_link):
 def main():
     st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide", )
     
-    st.title(":microphone: 🎤 Youtube Audio Lofi Converter")
+    st.title(":microphone: Youtube Audio Lofi Converter")
     st.info("New and improved website is development")
     st.info("Tip: Use Headphone for best experience :headphones:")
 
@@ -91,7 +91,7 @@ def main():
                 music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
                 # Show Lofi converted audio
-                st.write("Youtube Audio Lofi Converted Audio (Listenning Preview Below)")
+                st.write("Youtube Audio Lofi Converted Audio (🔉 Listenning Preview Below)")
                 st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
                 
                 st.info (":fire::fire::fire:Note: Due to Select MP3 Bitrate above and original Youtube Audio support, audio quality after converted may depend on it :smile:")
