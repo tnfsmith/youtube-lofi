@@ -94,7 +94,7 @@ def main():
 
         # Get user settings for slowedreverb function
         room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
-        duration =0
+        #duration =0
         if duration <= 1200:  # 20 minutes
             room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
             if  st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor):
