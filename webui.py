@@ -83,6 +83,12 @@ def main():
         duration = 0  # Initialize duration
         d = None  # Initialize 'd' to ensure it's defined
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
+            d = download_youtube_audio(youtube_link)
+            print(f"Retrieving YouTube link: {youtube_link}")
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+            if d:
+            audio_file, mp3_base_file, song_name = d
             # Check if the audio is already processed and stored in session state
             if 'processed_audio' in st.session_state and youtube_link == st.session_state['youtube_link']:
             # Use the processed audio from the session state
