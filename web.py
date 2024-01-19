@@ -86,6 +86,26 @@ def main():
 
                 # Display the audio player
                 #st.audio(mp3_base_file, format="audio/mp3")
+                # Display the descriptive text
+                st.markdown("🎶 Original Downloaded Youtube Audio (.wav)")
+
+                # Display the download button on a new line
+                with open(mp3_base_file, "rb") as file:
+                    st.download_button(
+                        label="💾 Download",
+                        data=file.read(),
+                        file_name=f"{song_name}.mp3",
+                        mime="audio/mp3"
+                    )
+
+                # Display the audio player
+                st.audio(mp3_base_file, format="audio/mp3")
+                
+                # Only works if 'mp3_base_file' is a URL
+                st.markdown(f"🎶 Original Downloaded Youtube Audio (.wav) [💾 Download]({mp3_base_file})")
+
+                # Display the audio player
+                st.audio(mp3_base_file, format="audio/mp3")
 
                 # Show original audio
                 st.write("🎶 Original Downloaded Youtube Audio (.wav)")
