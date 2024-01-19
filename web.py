@@ -78,11 +78,11 @@ def main():
                 audio_file, mp3_base_file, song_name = d
 
                 # Show original audio text and download link on the same line
-                st.markdown(
-                    f"🎶 Original Downloaded Youtube Audio (.wav) "
-                    f"[💾 Download]({mp3_base_file})",
-                    unsafe_allow_html=True
-                )
+                #st.markdown(
+                #    f"🎶 Original Downloaded Youtube Audio (.wav) "
+                #    f"[💾 Download]({mp3_base_file})",
+                #    unsafe_allow_html=True
+                #)
 
                 # Display the audio player
                 st.audio(mp3_base_file, format="audio/mp3")
