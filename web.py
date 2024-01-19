@@ -128,7 +128,7 @@ def main():
 
 # Function to get user settings
 def get_user_settings():
-    advanced_expander = st.expander("Advanced Settings")
+    advanced_expander = st.expander("🎼 Advanced Settings 👏")
     with advanced_expander:
         st.write("Adjust the parameters for the slowedreverb function:")
         room_size = st.slider("Reverb Room Size", min_value=0.1, max_value=1.0, value=0.75, step=0.1)

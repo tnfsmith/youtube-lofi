@@ -5,7 +5,7 @@ from math import trunc
 import numpy as np
 import sys
       
-def slowedreverb(audio, output, room_size = 0.7, damping = 0.5, wet_level = 0.08, dry_level = 0.2, delay = 2, slowfactor = 0.08):
+def slowedreverb(audio, output, room_size = 0.75, damping = 0.5, wet_level = 0.08, dry_level = 0.2, delay = 2, slowfactor = 0.08):
 
     if '.wav' not in audio:
         print('Audio needs to be .wav! Converting...')
