@@ -79,7 +79,7 @@ def main():
 
 
                 # Show original audio
-                st.write("🎶 Original Downloaded Youtube Audio (.wav)"),label="💾 Download Original Youtube Audio 🎵",
+                st.write("🎶 Original Downloaded Youtube Audio (.wav)")+ label="💾 Download Original Youtube Audio 🎵",
                 st.audio(mp3_base_file, format="audio/mp3")
                 # Download button for the original audio
                 st.download_button(
