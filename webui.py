@@ -128,8 +128,8 @@ def main():
                     
                     st.info (":fire::fire::fire:Note: Due to original Youtube Audio support, audio quality after converted may depend on it :smile:")
                     st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
-                    st.session_state.processed_audio = music.msc_to_mp3_inf(output_file)
-                    st.session_state.processed_audio_file_name = f"{song_name}_lofi.flac"
+                    #st.session_state.processed_audio = music.msc_to_mp3_inf(output_file)
+                    #st.session_state.processed_audio_file_name = f"{song_name}_lofi.flac"
                 else:
                     st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
                 # Once processed, store the result in session state
