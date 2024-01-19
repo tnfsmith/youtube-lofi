@@ -94,7 +94,7 @@ def main():
         # Get user settings for slowedreverb function
         room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
         duration =0
-        if  st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor) and duration <=1200:
+        if  st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor) :
             st.session_state.reverb_settings = (room_size, damping, wet_level, dry_level, delay, slow_factor)
             # Process audio with slowedreverb function
             output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
@@ -106,10 +106,7 @@ def main():
 
 # ... [Footer and other components]
 # Function to get video duration
-def get_video_duration(youtube_link):
-    with yt_dlp.YoutubeDL({'quiet': True, "noplaylist": True}) as ydl:
-        info_dict = ydl.extract_info(youtube_link, download=False)
-        return info_dict.get('duration', 0)
+
     # Footer and BuyMeACoffee button
     st.markdown("""
             <h10 style="text-align: center; position: fixed; bottom: 3rem;">Developed <a href='https://lequocthai.com'>Lê Quốc Thái</a> | <a href='mailto:lequocthai@gmail.com'>lequocthai[at]gmail.com</a> | <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a> </h10>""",
