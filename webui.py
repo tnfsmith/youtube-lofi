@@ -59,52 +59,71 @@ def download_youtube_audio(youtube_link):
 
 # Main function for the web app
 def main():
-    st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide")
+    st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide", )
     
     st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
-    st.info("🌟 Auto download audio at 320kbps. New features are still in development for best user experience. 🎉 Tip: Use Headphones for the best experience :headphones:")
+    st.info("🌟 Auto download audio at 320kbps. New features is still development for best user experience. 🎉 Tip: Use Headphone for best experience :headphones:")
+    #st.info("Tip: Use Headphone for best experience :headphones:")
 
-    # Initialize session state
-    if 'audio_data' not in st.session_state:
-        st.session_state.audio_data = None
-    if 'reverb_settings' not in st.session_state:
-        st.session_state.reverb_settings = None
+    # Select bitrate
+    #bitrate_options = ['192k', '256k', '320k']
+    #selected_bitrate = st.selectbox("🎧 Select MP3 Bitrate: 🎧", bitrate_options, index=2)  # Default to highest quality
 
     with st.form(key='youtube_link_form'):
-        youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example URL below Ai muốn nghe không - Đen Vâu", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8", help="Example this URL Ai muốn nghe không - Đen Vâu")
-        submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
+            youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example URL below Ai muốn nghe không - Đen Vâu", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8", help="Example this URL Ai muốn nghe không - Đen Vâu")
+            #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
+            #process_button = st.button("Process Audio")
+            submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
+
+    
 
     if submit_button and youtube_link:
-        # Process audio and store in session state
-        d = download_youtube_audio(youtube_link)
-        if d:
-            audio_file, mp3_base_file, song_name = d
-            st.session_state.audio_data = (audio_file, mp3_base_file, song_name)
+        duration = 0  # Initialize duration
+        try:   # Download audio from YouTube link and save as a WAV file (using cached function)
+            d = download_youtube_audio(youtube_link)
+            print(f"Retreaving YouTube link: {youtube_link}")
+            if d is not None:
+                audio_file, mp3_base_file, song_name = d
+                # Download button for the original audio mp3 before convert to.wav file
+                st.download_button(
+                    label="💾 Download Original Youtube Audio 🎵",
+                    data=mp3_base_file,
+                    file_name=f"{song_name}.mp3",
+                    mime="audio/mp3"
+                )
+                # Show original audio
+                st.write("🎶 Original Downloaded Youtube Audio (.wav). Click play button to listen:")
 
-    if st.session_state.audio_data:
-        audio_file, mp3_base_file, song_name = st.session_state.audio_data
-        st.download_button(
-            label="💾 Download Original Youtube Audio 🎵",
-            data=mp3_base_file,
-            file_name=f"{song_name}.mp3",
-            mime="audio/mp3"
-        )
-        st.audio(mp3_base_file, format="audio/mp3")
+                st.audio(mp3_base_file, format="audio/mp3")
+                # Download button for the original audio
+                #st.download_button(
+                #    label="💾 Download Original Youtube Audio 🎵",
+                #    data=mp3_base_file,
+                #    file_name=f"{song_name}.mp3",
+                #    mime="audio/mp3"
+                #)
+                
+                # Get user settings for slowedreverb function
+                if duration <=1200: # 1200 seconds == 20 minutes
+                    room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
 
-        # Get user settings for slowedreverb function
-        room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
+                    # Process audio with slowedreverb function
+                    output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
+                    print(f"🎯 User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
+                    music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
-        if st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor):
-            st.session_state.reverb_settings = (room_size, damping, wet_level, dry_level, delay, slow_factor)
-            # Process audio with slowedreverb function
-            output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
-            music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
-
-            st.write("🎶 Youtube Audio Lofi Converted Audio (🔉 Listening Preview Below)")
-            st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
-            st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
-
-# ... [Footer and other components]
+                    # Show Lofi converted audio
+                    st.write("🎶 Youtube Audio Lofi Converted Audio (🔉 Listenning Preview Below)")
+                    st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
+                    
+                    st.info (":fire::fire::fire:Note: Due to original Youtube Audio support, audio quality after converted may depend on it :smile:")
+                    st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
+                else:
+                    st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
+        except Exception as e:
+               st.error(f"An error occurred: {e}")
+                #print("Error occcored in code")
+               st.warning("Error Try again")
 
     # Footer and BuyMeACoffee button
     st.markdown("""
