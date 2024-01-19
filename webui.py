@@ -77,10 +77,10 @@ def main():
 
     
     # Initialize session state variables if they don't exist
-    if 'processed_audio' not in st.session_state:
-        st.session_state.processed_audio = None
-    if 'processed_audio_file_name' not in st.session_state:
-        st.session_state.processed_audio_file_name = ''
+    #if 'processed_audio' not in st.session_state:
+    #    st.session_state.processed_audio = None
+    #if 'processed_audio_file_name' not in st.session_state:
+    #    st.session_state.processed_audio_file_name = ''
 
     if submit_button and youtube_link:
         duration = 0  # Initialize duration
