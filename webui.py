@@ -77,13 +77,14 @@ def main():
 
         
     if submit_button and youtube_link:
-        # Initialize session state variables if they don't exist
-        if 'processed_audio' not in st.session_state:
-           st.session_state.processed_audio = None
-        if 'processed_audio_file_name' not in st.session_state:
-           st.session_state.processed_audio_file_name = ''
-       duration = 0  # Initialize duration
+        
+            duration = 0  # Initialize duration
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
+            # Initialize session state variables if they don't exist
+            if 'processed_audio' not in st.session_state:
+               st.session_state.processed_audio = None
+            if 'processed_audio_file_name' not in st.session_state:
+               st.session_state.processed_audio_file_name = ''
             d = download_youtube_audio(youtube_link)
             print(f"Retreaving YouTube link: {youtube_link}")
             if d is not None:
