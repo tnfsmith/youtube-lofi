@@ -65,9 +65,9 @@ def main():
 
     # Select bitrate
     bitrate_options = ['128k', '192k', '256k', '320k']
-    selected_bitrate = st.selectbox("Select MP3 Bitrate:", bitrate_options, index=3)  # Default to highest quality
+    selected_bitrate = st.selectbox("🎧 Select MP3 Bitrate: 🎧", bitrate_options, index=3)  # Default to highest quality
 
-    youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8")
+    youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8")
     #youtube_link = st.text_input("Enter the YouTube link 🔗 of the song to convert:", placeholder="https://www.youtube.com/watch?v=JxBnLmCOEJ8") #Den Vau
     try:
         if youtube_link:
@@ -79,7 +79,7 @@ def main():
 
 
                 # Show original audio
-                st.write("Original Audio")
+                st.write("🎶 Original Audio")
                 st.audio(mp3_base_file, format="audio/mp3")
 
                 # Get user settings for slowedreverb function
@@ -87,15 +87,15 @@ def main():
 
                 # Process audio with slowedreverb function
                 output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
-                print(f"User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
+                print(f"🎯 User Settings: {audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor}")
                 music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
 
                 # Show Lofi converted audio
-                st.write("Youtube Audio Lofi Converted Audio (🔉 Listenning Preview Below)")
+                st.write("🎶 Youtube Audio Lofi Converted Audio (🔉 Listenning Preview Below)")
                 st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
                 
                 st.info (":fire::fire::fire:Note: Due to Select MP3 Bitrate above and original Youtube Audio support, audio quality after converted may depend on it :smile:")
-                st.download_button("🎵 Download Lossless Audio (.flac)", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
+                st.download_button("🎵 Download Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
                 
     except:
         print("Error occcored in code")
