@@ -82,7 +82,7 @@ def main():
            st.session_state.processed_audio = None
         if 'processed_audio_file_name' not in st.session_state:
            st.session_state.processed_audio_file_name = ''
-            duration = 0  # Initialize duration
+          duration = 0  # Initialize duration
         try:   # Download audio from YouTube link and save as a WAV file (using cached function)
             d = download_youtube_audio(youtube_link)
             print(f"Retreaving YouTube link: {youtube_link}")
