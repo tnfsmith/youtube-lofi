@@ -88,7 +88,8 @@ def main():
                 #st.audio(mp3_base_file, format="audio/mp3")
                                 
                 # Only works if 'mp3_base_file' is a URL
-
+                # Display the descriptive text
+                st.markdown("🎶 Original Downloaded Youtube Audio (.wav)")
                 # Show original audio
                 #st.write("🎶 Original Downloaded Youtube Audio (.wav)")
                 st.markdown(f"🎶 Original Downloaded Youtube Audio (.wav) [💾 Download]({mp3_base_file})")
