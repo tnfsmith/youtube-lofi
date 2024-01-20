@@ -109,7 +109,7 @@ def main():
     
         room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
     # Audio player for the Lofi audio
-       st.audio(st.session_state.lofi_audio_data, format="audio/flac")   
+        st.audio(st.session_state.lofi_audio_data, format="audio/flac")   
     if st.session_state.lofi_audio_data:
         # Download button for the Lofi audio
         st.download_button(
