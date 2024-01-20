@@ -72,6 +72,9 @@ def main():
         st.session_state.audio_data = None
     if 'reverb_settings' not in st.session_state:
         st.session_state.reverb_settings = None
+    if 'download_clicked' not in st.session_state:
+        st.session_state.download_clicked = False
+    
     #Initization duration
     duration = 0
     with st.form(key='youtube_link_form'):
@@ -97,12 +100,14 @@ def main():
 
     if st.session_state.audio_data:
         audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
-        st.download_button(
-            label="💾 Download Original Youtube Audio 🎵",
-            data=mp3_base_file,
-            file_name=f"{song_name}.mp3",
-            mime="audio/mp3"
-        )
+        if not st.session_state.download_clicked:
+            if st.download_button(
+                label="💾 Download Original Youtube Audio 🎵",
+                data=mp3_base_file,
+                file_name=f"{song_name}.mp3",
+                mime="audio/mp3"
+            ):
+                st.session_state.download_clicked = True
         st.audio(mp3_base_file, format="audio/mp3")
 
         # Get user settings for slowedreverb function
