@@ -156,21 +156,6 @@ def download_youtube_audio(youtube_link, st_placeholder):
         "noplaylist": True,
         'progress_hooks': [my_hook],
     }
-
-    try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info_dict = ydl.extract_info(youtube_link, download=True)
-            audio_file = ydl.prepare_filename(info_dict)
-            song_name = info_dict['title']
-            duration = info_dict.get('duration', 0)
-            filesize = info_dict.get('filesize', 0)
-            st_placeholder.text(f"Downloaded: {song_name}\nDuration: {duration} seconds\nFile Size: {filesize} bytes")
-            mp3_file_base = music.msc_to_mp3_inf(audio_file)
-            return (audio_file, mp3_file_base, song_name, duration)
-    except Exception as e:
-        st_placeholder.text(f"Error during download: {e}")
-        return None
-
     return None
     
 def get_user_settings():
