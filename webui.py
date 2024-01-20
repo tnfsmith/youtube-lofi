@@ -57,6 +57,26 @@ def download_youtube_audio(youtube_link):
                 st.error(f"Error during download: {e}")
                 print(f"ERROR: {e} ==> {youtube_link} in download_youtube_audio")
         return None
+
+# Main function for the web app
+def main():
+    st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide")
+    
+    st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
+    st.info("🌟 Auto download audio at 320kbps. New features are still in development for best user experience. 🎉 Tip: Use Headphones for the best experience :headphones:")
+
+    # Initialize session state
+    if 'audio_data' not in st.session_state:
+        st.session_state.audio_data = None
+    if 'reverb_settings' not in st.session_state:
+        st.session_state.reverb_settings = None
+    #Initization duration
+    duration = 0
+    with st.form(key='youtube_link_form'):
+        youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example URL below Ai muốn nghe không - Đen Vâu", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8", help="Example this URL Ai muốn nghe không - Đen Vâu")
+        submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
+
+    if submit_button and youtube_link:
 def download_youtube_audio(youtube_link):
     uu = str(uuid.uuid4())
     progress_bar = st.empty()
@@ -88,26 +108,7 @@ def download_youtube_audio(youtube_link):
         st.error(f"Error during download: {e}")
         return None
 
-    return None
-# Main function for the web app
-def main():
-    st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide")
-    
-    st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
-    st.info("🌟 Auto download audio at 320kbps. New features are still in development for best user experience. 🎉 Tip: Use Headphones for the best experience :headphones:")
-
-    # Initialize session state
-    if 'audio_data' not in st.session_state:
-        st.session_state.audio_data = None
-    if 'reverb_settings' not in st.session_state:
-        st.session_state.reverb_settings = None
-    #Initization duration
-    duration = 0
-    with st.form(key='youtube_link_form'):
-        youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example URL below Ai muốn nghe không - Đen Vâu", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8", help="Example this URL Ai muốn nghe không - Đen Vâu")
-        submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
-
-    if submit_button and youtube_link:
+    return None        
         # Process audio and store in session state
         d = download_youtube_audio(youtube_link)
         
