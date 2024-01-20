@@ -60,8 +60,8 @@ def download_youtube_audio(youtube_link):
         return None
 
 # Main function for the web app
+st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide")
 def main():
-    st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide")
     
     st.title(":microphone: Youtube Audio Lofi Converter (Lossless Audio)")
     st.info("🌟 Auto download audio at 320kbps. New features are still in development for best user experience. 🎉 Tip: Use Headphones for the best experience :headphones:")
