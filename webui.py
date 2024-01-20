@@ -85,17 +85,10 @@ def main():
         if d and len(d)==5:
             
             audio_file, mp3_base_file, song_name, duration, filesize = d
-            st.session_state.audio_data = d
+            
             st.session_state.audio_data = (audio_file, mp3_base_file, song_name, duration)
             st.write(f"Downloaded: {song_name}.\nFile Extension: webp\n. File Size: {filesize:.2f} MB")
             
-            if duration <= 1200:  # 20 minutes
-                room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
-                output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
-                music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
-                st.session_state.lofi_audio_data = music.msc_to_mp3_inf(output_file)
-            else:
-                st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
         else:
             st.session_state.audio_data = None
             st.error("Failed to download and process the YouTube video. Please check the URL and try again.")
@@ -112,35 +105,23 @@ def main():
             mime="audio/mp3"
         )
         st.audio(mp3_base_file, format="audio/mp3")
-    if st.session_state.audio_data:
-            audio_file, mp3_base_file, song_name, duration, filesize = st.session_state.audio_data
 
-            # Download button for the original audio
-            st.download_button(
-                label="💾 Download Original Youtube Audio 🎵",
-                data=mp3_base_file,
-                file_name=f"{song_name}.mp3",
-                mime="audio/mp3"
-            )
-
-            # Audio player for the original audio
-            st.audio(mp3_base_file, format="audio/mp3")
-
-    if st.session_state.lofi_audio_data:
-            # Download button for the Lofi audio
-            st.download_button(
-                label="🎵 Download Lofi Lossless Audio (.flac) 💾",
-                data=st.session_state.lofi_audio_data,
-                file_name=f"{song_name}_lofi.flac",
-                mime="audio/flac"
-            )
-
-            # Audio player for the Lofi audio
-            st.audio(st.session_state.lofi_audio_data, format="audio/flac")
         # Get user settings for slowedreverb function
         #room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
         #duration =0        
-        
+        if duration <= 1200:  # 20 minutes
+                room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
+                if  st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor):
+                    st.session_state.reverb_settings = (room_size, damping, wet_level, dry_level, delay, slow_factor)
+                    # Process audio with slowedreverb function
+                    output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
+                    music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
+
+                    st.write("🎶 Youtube Audio Lofi Converted Audio (🔉 Listening Preview Below)")
+                    st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
+                    st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
+        else:
+            st.info("The video is longer than 20 minutes. Reverb processing is skipped.") 
 # ... [Footer and other components]
 # Function to get video duration
     # Footer
