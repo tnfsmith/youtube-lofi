@@ -64,7 +64,7 @@ st.set_page_config(page_title="Youtube Audio Download & Lofi Converter", page_ic
 def main():
     
     st.title(":microphone: Youtube Audio Download & Lofi Converter (Lossless)")
-    st.info("🌟 Auto download audio at 320kbps. New features are still in development for best user experience. 🎉 Tip: Use Headphones for the best experience :headphones:")
+    st.info("🌟 Auto download audio at 320kbps. Videos download is still in development. 🎉 Tip: Use Headphones for the best experience :headphones:")
 
     # Initialize session state
     if 'audio_data' not in st.session_state:
