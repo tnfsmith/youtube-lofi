@@ -70,8 +70,8 @@ def main():
     # Initialize session state
     if 'audio_data' not in st.session_state:
         st.session_state.audio_data = None
-    if 'reverb_settings' not in st.session_state:
-        st.session_state.reverb_settings = None
+    #if 'reverb_settings' not in st.session_state:
+    #    st.session_state.reverb_settings = None
     #Initization duration
     duration = 0
     with st.form(key='youtube_link_form'):
