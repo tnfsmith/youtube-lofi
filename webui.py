@@ -89,9 +89,9 @@ def main():
 
             st.session_state.audio_data = (audio_file, mp3_base_file, song_name, duration)
             st.write(f"Downloaded: {song_name}.\nFile Extension: webp\n. File Size: {filesize:.2f} MB")
-            
+            room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
             if duration <= 1200:  # 20 minutes
-                #room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
+                room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
                 output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
                 music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
                 st.session_state.lofi_audio_data = music.msc_to_mp3_inf(output_file)
