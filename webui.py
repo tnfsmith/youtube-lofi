@@ -76,7 +76,11 @@ def main():
     duration = 0
     with st.form(key='youtube_link_form'):
         youtube_link = st.text_input("🔎 Paste the YouTube link 🔗 to download/convert Lofi:", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8", help="Defaul URL is ==> Ai muốn nghe không - Đen Vâu")
-        submit_button = st.form_submit_button(label='💯 Click Process Audio 🔃')
+        col1, col2=st.column(2)
+        with col1:
+            submit_button = st.form_submit_button(label='💯 Click Process Audio 🔃')
+        with col2:
+            submit_button=st.form_submit_button(label='Clear')
 
     if submit_button and youtube_link:
         # Process audio and store in session state
