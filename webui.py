@@ -70,8 +70,8 @@ def main():
     # Initialize session state
     if 'audio_data' not in st.session_state:
         st.session_state.audio_data = None
-    #if 'reverb_settings' not in st.session_state:
-    #    st.session_state.reverb_settings = None
+    if 'reverb_settings' not in st.session_state:
+        st.session_state.reverb_settings = None
     #Initization duration
     duration = 0
     with st.form(key='youtube_link_form'):
@@ -91,7 +91,7 @@ def main():
             st.write(f"Downloaded: {song_name}.\nFile Extension: webp\n. File Size: {filesize:.2f} MB")
             
             if duration <= 1200:  # 20 minutes
-                room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
+                #room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
                 output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
                 music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
                 st.session_state.lofi_audio_data = music.msc_to_mp3_inf(output_file)
