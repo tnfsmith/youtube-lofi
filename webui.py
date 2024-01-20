@@ -109,6 +109,8 @@ def main():
             file_name=f"{song_name}_lofi.flac",
             mime="audio/flac"
         )
+        # Audio player for the Lofi audio
+        st.audio(st.session_state.lofi_audio_data, format="audio/flac")   
         if duration <= 1200:  # 20 minutes
                 room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
                 output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
@@ -117,8 +119,7 @@ def main():
             
     else:
         st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
-    # Audio player for the Lofi audio
-        st.audio(st.session_state.lofi_audio_data, format="audio/flac")   
+    
         
 # ... [Footer and other components]
 # Function to get video duration
