@@ -74,8 +74,8 @@ def main():
         st.session_state.lofi_audio_data = None
     #if 'audio_data' in st.session_state:
     #    st.session_state.audio_data = True
-    #if 'reverb_settings' not in st.session_state:
-    #    st.session_state.reverb_settings = None
+    if 'reverb_settings' not in st.session_state:
+        st.session_state.reverb_settings = None
     #if 'reverb_processed' not in st.session_state:
     #    st.session_state.reverb_processed = None
     #Initization duration
