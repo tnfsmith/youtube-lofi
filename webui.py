@@ -98,12 +98,7 @@ def main():
     if st.session_state.audio_data:
         audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
         st.audio(mp3_base_file, format="audio/mp3")
-        st.download_button(
-            label="💾 Download Original Youtube Audio 🎵",
-            data=mp3_base_file,
-            file_name=f"{song_name}.mp3",
-            mime="audio/mp3"
-        )
+        
         
 
         # Get user settings for slowedreverb function
@@ -122,6 +117,12 @@ def main():
                 st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
         else:
             st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
+            st.download_button(
+            label="💾 Download Original Youtube Audio 🎵",
+            data=mp3_base_file,
+            file_name=f"{song_name}.mp3",
+            mime="audio/mp3"
+        )
 # ... [Footer and other components]
 # Function to get video duration
 
