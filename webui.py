@@ -97,10 +97,7 @@ def main():
             return  # Exit if download fails
     if st.session_state.audio_data and len(st.session_state.audio_data) == 4:
         audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
-
-    if st.session_state.audio_data:
-        audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
-        if not st.session_state.download_clicked:
+    if not st.session_state.download_clicked:
             if st.download_button(
                 label="💾 Download Original Youtube Audio 🎵",
                 data=mp3_base_file,
@@ -108,6 +105,9 @@ def main():
                 mime="audio/mp3"
             ):
                 st.session_state.download_clicked = True
+    if st.session_state.audio_data:
+        audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
+        
         st.audio(mp3_base_file, format="audio/mp3")
 
         # Get user settings for slowedreverb function
