@@ -75,9 +75,7 @@ def main():
     if 'reverb_settings' not in st.session_state:
         st.session_state.reverb_settings = None
     if 'reverb_processed' not in st.session_state:
-        st.session_state.reverb_processed = False
-    if 'reverb_processed' in st.session_state:
-        st.session_state.reverb_processed = True
+        st.session_state.reverb_processed = None
     #Initization duration
     duration = 0
     with st.form(key='youtube_link_form'):
