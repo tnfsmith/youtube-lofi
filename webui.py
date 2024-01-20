@@ -104,7 +104,7 @@ def main():
             file_name=f"{song_name}.mp3",
             mime="audio/mp3"
         )
-        
+        st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
         # Get user settings for slowedreverb function
         #room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
         #duration =0        
