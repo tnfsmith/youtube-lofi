@@ -125,8 +125,8 @@ def main():
                 st.write("🎶 Youtube Audio Lofi Converted Audio (🔉 Listening Preview Below)")
                 st.audio(music.msc_to_mp3_inf(output_file), format="audio/flac") #audio/mp3
                 st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
-        else:
-            st.info("The video is longer than 20 minutes. Reverb processing is skipped.")    
+            else:
+                st.info("The video is longer than 20 minutes. Reverb processing is skipped.")    
             
 # ... [Footer and other components]
 # Function to get video duration
