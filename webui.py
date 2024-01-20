@@ -78,8 +78,8 @@ def main():
 
     if submit_button and youtube_link:
         # Process audio and store in session state
-        #d = download_youtube_audio(youtube_link)
-        d=0
+        d = download_youtube_audio(youtube_link)
+        
         if d and len(d)==4:
             d = download_youtube_audio(youtube_link)
             st.session_state.audio_data = d
