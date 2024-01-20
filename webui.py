@@ -46,25 +46,17 @@ def download_youtube_audio(youtube_link):
     if isDownlaodable(youtube_link):
         try:
             with yt_dlp.YoutubeDL({'format': 'bestaudio/best', 'outtmpl': 'uploaded_files/' + uu + '.%(ext)s', "quiet":True, "noplaylist":True}) as ydl:
-                info_dict = ydl.extract_info(youtube_link, download=False) # Fetch info without downloading
+                info_dict = ydl.extract_info(youtube_link, download=True)
                 audio_file = ydl.prepare_filename(info_dict)
                 song_name = info_dict['title']
                 duration = info_dict.get('duration',0)  # Get the duration
-                filesize = info_dict.get('filesize',0)  # Get the filesize
-                st_placeholder.text(f"About to download: {song_name}\nDuration: {duration} seconds\nEstimated File Size: {filesize} bytes")
-                # Proceed to download
-                ydl.download([youtube_link])
-                audio_file = ydl.prepare_filename(info_dict)
-                mp3_file_base = music.msc_to_mp3_inf(audio_file)
-                return (audio_file, mp3_file_base, song_name, duration, filesize)
-        
-            #print(f"Downloaded YouTube link: {youtube_link} ==> {song_name}")
-            #mp3_file_base = music.msc_to_mp3_inf(audio_file)
-            #return (audio_file, mp3_file_base, song_name, duration,filesize)
+                filesize = info_dict.get('filesize',0)
+            print(f"Downloaded YouTube link: {youtube_link} ==> {song_name}")
+            mp3_file_base = music.msc_to_mp3_inf(audio_file)
+            return (audio_file, mp3_file_base, song_name, duration,filesize)
         except Exception as e:
                 st.error(f"Error during download: {e}")
                 print(f"ERROR: {e} ==> {youtube_link} in download_youtube_audio")
-                st_placeholder.text(f"Error during download: {e}")
         return None
 
 # Main function for the web app
@@ -84,20 +76,20 @@ def main():
     with st.form(key='youtube_link_form'):
         youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example URL below Ai muốn nghe không - Đen Vâu", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8", help="Example this URL Ai muốn nghe không - Đen Vâu")
         submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
-    download_placeholder=st.empty()
+
     if submit_button and youtube_link:
         # Process audio and store in session state
-        d = download_youtube_audio(youtube_link,download_placeholder)
+        d = download_youtube_audio(youtube_link)
         
         if d and len(d)==5:
             
             audio_file, mp3_base_file, song_name, duration, filesize = d
             st.session_state.audio_data = (audio_file, mp3_base_file, song_name, duration)
-            download_placeholder.text(f"Downloaded: {song_name}\nDuration: {duration} seconds\nFile Size: {filesize} bytes")
+            st.write(f"Downloaded: {song_name}\nDuration: {duration} seconds\nFile Size: {filesize} bytes")
             
         else:
             st.session_state.audio_data = None
-            download_placeholder.error("Failed to download and process the YouTube video. Please check the URL and try again.")
+            st.error("Failed to download and process the YouTube video. Please check the URL and try again.")
             return  # Exit if download fails
     if st.session_state.audio_data and len(st.session_state.audio_data) == 4:
         audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
@@ -151,27 +143,6 @@ def main():
         )
 
 # Function to get user settings
-def download_youtube_audio(youtube_link, st_placeholder):
-    uu = str(uuid.uuid4())
-
-    try:
-        with yt_dlp.YoutubeDL({'format': 'bestaudio/best', 'outtmpl': 'uploaded_files/' + uu + '.%(ext)s', "quiet": True, "noplaylist": True}) as ydl:
-            info_dict = ydl.extract_info(youtube_link, download=False)  # Fetch info without downloading
-            song_name = info_dict['title']
-            duration = info_dict.get('duration', 0)
-            filesize = info_dict.get('filesize', 0)
-            st_placeholder.text(f"About to download: {song_name}\nDuration: {duration} seconds\nEstimated File Size: {filesize} bytes")
-
-            # Proceed to download
-            ydl.download([youtube_link])
-            audio_file = ydl.prepare_filename(info_dict)
-            mp3_file_base = music.msc_to_mp3_inf(audio_file)
-            return (audio_file, mp3_file_base, song_name, duration, filesize)
-    except Exception as e:
-        st_placeholder.text(f"Error during download: {e}")
-        return None
-
-    return None    
 def get_user_settings():
     advanced_expander = st.expander("🎼 Advanced Settings 👏")
     with advanced_expander:
