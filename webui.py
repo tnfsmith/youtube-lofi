@@ -5,6 +5,8 @@ import yt_dlp
 import uuid
 from streamlit.components.v1 import html, components
 
+# Ensure this is the first Streamlit command used (right after your imports)
+st.set_page_config(page_title="Youtube Audio Lofi Converter", page_icon=":microphone:", layout="wide")
 
 # Function to delete temporary audio files
 def delete_temp_files(audio_file, output_file, mp3_file):
