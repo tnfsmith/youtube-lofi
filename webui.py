@@ -86,7 +86,7 @@ def main():
             st.error("Failed to download and process the YouTube video. Please check the URL and try again.")
             return  # Exit if download fails
     if st.session_state.audio_data and len(st.session_state.audio_data) == 4:
-    audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
+        audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
 
     if st.session_state.audio_data:
         audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
