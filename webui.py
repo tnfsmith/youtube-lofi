@@ -96,7 +96,7 @@ def main():
         audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
 
     if st.session_state.audio_data:
-        audio_file, mp3_base_file, song_name, duration, filesize, file_extension = st.session_state.audio_data
+        audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
         st.audio(mp3_base_file, format="audio/mp3")
     
         with st.form("download_form"):
