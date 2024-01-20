@@ -50,7 +50,7 @@ def download_youtube_audio(youtube_link):
                 audio_file = ydl.prepare_filename(info_dict)
                 file_extension = info_dict['ext']
                 song_name = info_dict['title']
-                duration = info_dict.get('duration',0) / 60 # convert to minutes  # Get the duration
+                duration = info_dict.get('duration',0) # convert to minutes  # Get the duration
                 filesize = info_dict.get('filesize',0) / (1024 * 1024) # convert to MB
             print(f"Downloaded YouTube link: {youtube_link} ==> {song_name}")
             mp3_file_base = music.msc_to_mp3_inf(audio_file)
