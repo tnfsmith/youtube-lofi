@@ -54,7 +54,7 @@ def download_youtube_audio(youtube_link):
             mp3_file_base = music.msc_to_mp3_inf(audio_file)
             return (audio_file, mp3_file_base, song_name, duration)
         except Exception as e:
-                st.error("Error")
+                st.error(f"Error during download: {e}")
                 print(f"ERROR: {e} ==> {youtube_link} in download_youtube_audio")
         return None
 
