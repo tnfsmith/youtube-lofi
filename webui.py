@@ -77,41 +77,9 @@ def main():
         submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
 
     if submit_button and youtube_link:
-       def download_youtube_audio(youtube_link):
-            uu = str(uuid.uuid4())
-            progress_bar = st.empty()
-            status_text = st.empty()
-
-            def progress_hook(d):
-                if d['status'] == 'downloading':
-                    progress = d['_percent_str']
-                    size = d['_total_bytes_str'] or d['_total_bytes_estimate_str']
-                    status_text.text(f"Downloading... {progress} of {size}")
-                    progress_bar.progress(float(progress.strip('%'))/100)
-
-            try:
-                ydl_opts = {
-                    'format': 'bestaudio/best',
-                    'outtmpl': 'uploaded_files/' + uu + '.%(ext)s',
-                    'quiet': True,
-                    'noplaylist': True,
-                    'progress_hooks': [progress_hook],
-                }
-                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                    info_dict = ydl.extract_info(youtube_link, download=True)
-                    audio_file = ydl.prepare_filename(info_dict)
-                    song_name = info_dict['title']
-                    duration = info_dict.get('duration', 0)
-                    mp3_file_base = music.msc_to_mp3_inf(audio_file)
-                    return (audio_file, mp3_file_base, song_name, duration)
-            except Exception as e:
-                st.error(f"Error during download: {e}")
-                return None
-
-            return None        
         # Process audio and store in session state
         d = download_youtube_audio(youtube_link)
-        
+        st.print("d")
         if d and len(d)==4:
             st.session_state.audio_data = d
         else:
@@ -170,20 +138,6 @@ def main():
         )
 
 # Function to get user settings
-def my_hook(d):
-    if d['status'] == 'downloading':
-        print(d['filename'], d['downloaded_bytes'], d['total_bytes'], d['elapsed'], d['_percent_str'])
-
-def download_youtube_audio(youtube_link):
-    ydl_opts = {
-        'format': 'bestaudio/best',
-        'quiet': True,
-        'progress_hooks': [my_hook],
-        'outtmpl': 'uploaded_files/%(id)s.%(ext)s',
-    }
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info_dict = ydl.extract_info(youtube_link, download=True)
-
 def get_user_settings():
     advanced_expander = st.expander("🎼 Advanced Settings 👏")
     with advanced_expander:
