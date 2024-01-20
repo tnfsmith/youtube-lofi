@@ -70,7 +70,8 @@ def main():
         st.session_state.audio_data = None
     if 'reverb_settings' not in st.session_state:
         st.session_state.reverb_settings = None
-
+    #Initization duration
+    duration = 0
     with st.form(key='youtube_link_form'):
         youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example URL below Ai muốn nghe không - Đen Vâu", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8", help="Example this URL Ai muốn nghe không - Đen Vâu")
         submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
@@ -79,11 +80,11 @@ def main():
         # Process audio and store in session state
         d = download_youtube_audio(youtube_link)
         if d:
-            audio_file, mp3_base_file, song_name = d
-            st.session_state.audio_data = (audio_file, mp3_base_file, song_name)
+            audio_file, mp3_base_file, song_name, duration = d
+            st.session_state.audio_data = (audio_file, mp3_base_file, song_name, duration),
 
     if st.session_state.audio_data:
-        audio_file, mp3_base_file, song_name = st.session_state.audio_data
+        audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
         st.download_button(
             label="💾 Download Original Youtube Audio 🎵",
             data=mp3_base_file,
