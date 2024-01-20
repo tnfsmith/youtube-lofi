@@ -78,18 +78,18 @@ def main():
 
     if submit_button and youtube_link:
         # Process audio and store in session state
-        #d = download_youtube_audio(youtube_link)
+        d = download_youtube_audio(youtube_link)
         
         if d and len(d)==4:
             st.session_state.audio_data = d
-            
+            d = download_youtube_audio(youtube_link)
         else:
             st.session_state.audio_data = None
             st.error("Failed to download and process the YouTube video. Please check the URL and try again.")
             return  # Exit if download fails
     if st.session_state.audio_data and len(st.session_state.audio_data) == 4:
         audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
-        d = download_youtube_audio(youtube_link)
+
     if st.session_state.audio_data:
         audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
         st.download_button(
