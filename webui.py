@@ -50,9 +50,10 @@ def download_youtube_audio(youtube_link):
                 audio_file = ydl.prepare_filename(info_dict)
                 song_name = info_dict['title']
                 duration = info_dict.get('duration',0)  # Get the duration
+                filesize = info_dict.get('filesize',0)
             print(f"Downloaded YouTube link: {youtube_link} ==> {song_name}")
             mp3_file_base = music.msc_to_mp3_inf(audio_file)
-            return (audio_file, mp3_file_base, song_name, duration)
+            return (audio_file, mp3_file_base, song_name, duration,filesize)
         except Exception as e:
                 st.error(f"Error during download: {e}")
                 print(f"ERROR: {e} ==> {youtube_link} in download_youtube_audio")
@@ -80,10 +81,12 @@ def main():
         # Process audio and store in session state
         d = download_youtube_audio(youtube_link)
         
-        if d and len(d)==4:
+        if d and len(d)==5:
             
-            st.session_state.audio_data = d
-            d = download_youtube_audio(youtube_link)
+            audio_file, mp3_base_file, song_name, duration, filesize = d
+            st.session_state.audio_data = (audio_file, mp3_base_file, song_name, duration)
+            st.write(f"Downloaded: {song_name}\nDuration: {duration} seconds\nFile Size: {filesize} bytes")
+            
         else:
             st.session_state.audio_data = None
             st.error("Failed to download and process the YouTube video. Please check the URL and try again.")
