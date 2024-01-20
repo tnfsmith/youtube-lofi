@@ -63,7 +63,7 @@ def download_youtube_audio(youtube_link):
 st.set_page_config(page_title="Youtube Audio Download & Lofi Converter", page_icon=":microphone:", layout="wide")
 def main():
     
-    st.title(":microphone: Youtube Audio Download & Lofi Converter (Lossless)🎵")
+    st.title(":microphone: Youtube Audio Download & Lofi Converter 🎵")
     st.info("🌟 Auto download audio at 320kbps 🎵. Videos download is still in development. 🎉 Tip: Use Headphones for the best experience :headphones:")
 
     # Initialize session state
