@@ -122,34 +122,34 @@ def main():
                     st.download_button("🎵 Download Lofi Lossless Audio (.flac) 💾", music.msc_to_mp3_inf(output_file), song_name+"_lofi.flac") #_lofi.mp3
         else:
             st.info("The video is longer than 20 minutes. Reverb processing is skipped.") 
-# Footer
-st.markdown("---")  # This adds a horizontal line for visual separation
-# Footer content with smaller text in one column
-footer_content = """
-<small>Developed by <a href='https://lequocthai.com'>Lê Quốc Thái</a></small> <br>
-<small>Contact email: <a href='mailto:lequocthai@gmail.com'>lequocthai@gmail.com</a></small> <br>
-<small>Connect social <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a></small>
+    # Footer
+    st.markdown("---")  # This adds a horizontal line for visual separation
+    # Footer content with smaller text in one column
+    footer_content = """
+    <small>Developed by <a href='https://lequocthai.com'>Lê Quốc Thái</a></small> <br>
+    <small>Contact email: <a href='mailto:lequocthai@gmail.com'>lequocthai@gmail.com</a></small> <br>
+    <small>Connect social <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a></small>
 
-"""
-st.markdown(footer_content, unsafe_allow_html=True)
-# Footer and BuyMeACoffee button
-st.markdown("""
-        <h10 style="text-align: center; position: fixed; bottom: 3rem;">Developed <a href='https://lequocthai.com'>Lê Quốc Thái</a> | <a href='mailto:lequocthai@gmail.com'>lequocthai[at]gmail.com</a> | <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a> </h10>""",
-        unsafe_allow_html=True)
-button = """<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="LeQuocThaiy" data-color="#FFDD00" data-emoji="🥤" data-font="Cookie" data-text="Buy me a Coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>"""
-html(button, height=70, width=225)
-st.markdown(
-        """
-        <style>
-            iframe[width="225"] {
-                position: fixed;
-                bottom: 35px;
-                right: 40px;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    """
+    st.markdown(footer_content, unsafe_allow_html=True)
+    # Footer and BuyMeACoffee button
+    st.markdown("""
+            <h10 style="text-align: center; position: fixed; bottom: 3rem;">Developed <a href='https://lequocthai.com'>Lê Quốc Thái</a> | <a href='mailto:lequocthai@gmail.com'>lequocthai[at]gmail.com</a> | <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a> </h10>""",
+            unsafe_allow_html=True)
+    button = """<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="LeQuocThaiy" data-color="#FFDD00" data-emoji="🥤" data-font="Cookie" data-text="Buy me a Coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>"""
+    html(button, height=70, width=225)
+    st.markdown(
+            """
+            <style>
+                iframe[width="225"] {
+                    position: fixed;
+                    bottom: 35px;
+                    right: 40px;
+                }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
 
 # Function to get user settings
 def get_user_settings():
