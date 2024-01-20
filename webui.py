@@ -86,7 +86,7 @@ def main():
             
             audio_file, mp3_base_file, song_name, duration, filesize = d
             st.session_state.audio_data = (audio_file, mp3_base_file, song_name, duration)
-            st.write(f"Downloaded: {song_name}\nDuration: {duration} seconds\nFile Size: {filesize} bytes")
+            st.write(f"Downloaded: {song_name}\nExtension: {ext} \nDuration: {duration} minutes\nFile Size: {filesize} MB")
             
         else:
             st.session_state.audio_data = None
