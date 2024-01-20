@@ -106,8 +106,8 @@ def main():
                 music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
                 st.session_state.lofi_audio_data = music.msc_to_mp3_inf(output_file)
             
-            else:
-                st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
+    else:
+        st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
     if st.session_state.lofi_audio_data:
         # Download button for the Lofi audio
         st.download_button(
