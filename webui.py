@@ -97,13 +97,14 @@ def main():
 
     if st.session_state.audio_data:
         audio_file, mp3_base_file, song_name, duration = st.session_state.audio_data
+        st.audio(mp3_base_file, format="audio/mp3")
         st.download_button(
             label="💾 Download Original Youtube Audio 🎵",
             data=mp3_base_file,
             file_name=f"{song_name}.mp3",
             mime="audio/mp3"
         )
-        st.audio(mp3_base_file, format="audio/mp3")
+        
 
         # Get user settings for slowedreverb function
         #room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
