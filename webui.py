@@ -86,14 +86,7 @@ def main():
             audio_file, mp3_base_file, song_name, duration, filesize = d
             st.session_state.audio_data = d
 
-            if duration <= 1200:  # 20 minutes
-                room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
-                output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
-                music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
-                st.session_state.lofi_audio_data = music.msc_to_mp3_inf(output_file)
-                st.session_state.lofi_audio_data = True
-            else:
-                st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
+            
     if st.session_state.audio_data:
         audio_file, mp3_base_file, song_name, duration, filesize = st.session_state.audio_data
 
@@ -107,7 +100,14 @@ def main():
 
         # Audio player for the original audio
         st.audio(mp3_base_file, format="audio/mp3")
-    
+    if duration <= 1200:  # 20 minutes
+                room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
+                output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
+                music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
+                st.session_state.lofi_audio_data = music.msc_to_mp3_inf(output_file)
+            
+            else:
+                st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
     if st.session_state.lofi_audio_data:
         # Download button for the Lofi audio
         st.download_button(
