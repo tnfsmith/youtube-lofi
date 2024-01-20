@@ -75,15 +75,15 @@ def main():
     with st.form(key='youtube_link_form'):
         youtube_link = st.text_input("🔎 Enter the YouTube link 🔗 of the song to convert: Example URL below Ai muốn nghe không - Đen Vâu", value="https://www.youtube.com/watch?v=JxBnLmCOEJ8", help="Example this URL Ai muốn nghe không - Đen Vâu")
         submit_button = st.form_submit_button(label='💯 Process Audio 🔃')
-
+    download_placeholder = st.empty()  # Placeholder for download progress
     if submit_button and youtube_link:
         # Process audio and store in session state
-        d = download_youtube_audio(youtube_link)
+        d = download_youtube_audio(youtube_link,download_placeholder)
         
         if d and len(d)==4:
             
             st.session_state.audio_data = d
-            d = download_youtube_audio(youtube_link)
+            #d = download_youtube_audio(youtube_link)
         else:
             st.session_state.audio_data = None
             st.error("Failed to download and process the YouTube video. Please check the URL and try again.")
@@ -140,6 +140,39 @@ def main():
         )
 
 # Function to get user settings
+    
+def download_youtube_audio(youtube_link, st_placeholder):
+    uu = str(uuid.uuid4())
+
+    # Define a custom progress hook
+    def my_hook(d):
+        if d['status'] == 'finished':
+            st_placeholder.text(f"Downloaded file {d['filename']} of size {d['_total_bytes_str']}")
+
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'outtmpl': 'uploaded_files/' + uu + '.%(ext)s',
+        "quiet": True,
+        "noplaylist": True,
+        'progress_hooks': [my_hook],
+    }
+
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info_dict = ydl.extract_info(youtube_link, download=True)
+            audio_file = ydl.prepare_filename(info_dict)
+            song_name = info_dict['title']
+            duration = info_dict.get('duration', 0)
+            filesize = info_dict.get('filesize', 0)
+            st_placeholder.text(f"Downloaded: {song_name}\nDuration: {duration} seconds\nFile Size: {filesize} bytes")
+            mp3_file_base = music.msc_to_mp3_inf(audio_file)
+            return (audio_file, mp3_file_base, song_name, duration)
+    except Exception as e:
+        st_placeholder.text(f"Error during download: {e}")
+        return None
+
+    return None
+    
 def get_user_settings():
     advanced_expander = st.expander("🎼 Advanced Settings 👏")
     with advanced_expander:
