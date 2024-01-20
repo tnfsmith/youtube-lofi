@@ -106,7 +106,10 @@ def main():
 
         # Audio player for the original audio
         st.audio(mp3_base_file, format="audio/mp3")
-
+    
+        room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
+    # Audio player for the Lofi audio
+       st.audio(st.session_state.lofi_audio_data, format="audio/flac")   
     if st.session_state.lofi_audio_data:
         # Download button for the Lofi audio
         st.download_button(
@@ -116,8 +119,7 @@ def main():
             mime="audio/flac"
         )
 
-        # Audio player for the Lofi audio
-        st.audio(st.session_state.lofi_audio_data, format="audio/flac")   
+        
 # ... [Footer and other components]
 # Function to get video duration
     # Footer
