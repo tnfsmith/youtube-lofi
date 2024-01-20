@@ -123,16 +123,16 @@ def main():
             st.info("The video is longer than 20 minutes. Reverb processing is skipped.") 
 # ... [Footer and other components]
 # Function to get video duration
-# Footer
-st.markdown("---")  # This adds a horizontal line for visual separation
-# Footer content with smaller text in one column
-footer_content = """
-<small>Developed by <a href='https://lequocthai.com'>Lê Quốc Thái</a></small> <br>
-<small>Contact email: <a href='mailto:lequocthai@gmail.com'>lequocthai@gmail.com</a></small> <br>
-<small>Connect social <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a></small>
+    # Footer
+    st.markdown("---")  # This adds a horizontal line for visual separation
+    # Footer content with smaller text in one column
+    footer_content = """
+    <small>Developed by <a href='https://lequocthai.com'>Lê Quốc Thái</a></small> <br>
+    <small>Contact email: <a href='mailto:lequocthai@gmail.com'>lequocthai@gmail.com</a></small> <br>
+    <small>Connect social <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a></small>
 
-"""
-st.markdown(footer_content, unsafe_allow_html=True)
+    """
+    st.markdown(footer_content, unsafe_allow_html=True)
     # Footer and BuyMeACoffee button
     st.markdown("""
             <h10 style="text-align: center; position: fixed; bottom: 3rem;">Developed <a href='https://lequocthai.com'>Lê Quốc Thái</a> | <a href='mailto:lequocthai@gmail.com'>lequocthai[at]gmail.com</a> | <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a> </h10>""",
