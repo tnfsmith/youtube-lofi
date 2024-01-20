@@ -70,8 +70,8 @@ def main():
     # Initialize session state
     if 'audio_data' not in st.session_state:
         st.session_state.audio_data = None
-    #if 'reverb_settings' not in st.session_state:
-    #    st.session_state.reverb_settings = None
+    if 'reverb_settings' not in st.session_state:
+        st.session_state.reverb_settings = None
     if 'lofi_audio_data' not in st.session_state:
         st.session_state.lofi_audio_data = None
     #Initization duration
@@ -91,6 +91,7 @@ def main():
                 output_file = os.path.splitext(audio_file)[0] + "_lofi.wav"
                 music.slowedreverb(audio_file, output_file, room_size, damping, wet_level, dry_level, delay, slow_factor)
                 st.session_state.lofi_audio_data = music.msc_to_mp3_inf(output_file)
+                st.session_state.lofi_audio_data = True
             else:
                 st.info("The video is longer than 20 minutes. Reverb processing is skipped.")
     if st.session_state.audio_data:
