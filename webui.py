@@ -42,7 +42,7 @@ def isDownlaodable(youtube_link):
 @st.cache_data(max_entries=4)
 def download_youtube_audio(youtube_link):
     uu = str(uuid.uuid4())
-
+    
     if isDownlaodable(youtube_link):
         try:
             with yt_dlp.YoutubeDL({'format': 'bestaudio/best', 'outtmpl': 'uploaded_files/' + uu + '.%(ext)s', "quiet":True, "noplaylist":True}) as ydl:
@@ -94,7 +94,7 @@ def main():
 
         # Get user settings for slowedreverb function
         room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
-        #duration =0
+         duration =0        
         if duration <= 1200:  # 20 minutes
             room_size, damping, wet_level, dry_level, delay, slow_factor = get_user_settings()
             if  st.session_state.reverb_settings != (room_size, damping, wet_level, dry_level, delay, slow_factor):
