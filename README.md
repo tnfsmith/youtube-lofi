@@ -1,5 +1,7 @@
-# Welcome to [Lo-Fi Converter GUI!](https://youtube-lofi.streamlit.app/)
-Simple way to convert **Youtube** Song to Lo-Fi version of that song just from its url !!!
+# Welcome to [Youtube Audio Download Lossless & Lofi Converter!](https://youtube-lofi.streamlit.app/)
+
+👍 Simple way to Download at 320kbsp **Youtube** Song + Lo-Fi reverb that song just from its url !!!
+👍 Free to use at all :)
 
 # Footer and BuyMeACoffee button
 Developed <a href='https://lequocthai.com'>Lê Quốc Thái</a> | <a href='mailto:lequocthai@gmail.com'>lequocthai[at]gmail.com</a> | <a href='https://t.me/tnfsmith'>Telegram</a> | <a href='tel:0985010707'>Zalo</a> </h10>
