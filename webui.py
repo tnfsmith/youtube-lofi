@@ -46,7 +46,7 @@ def download_youtube_audio(youtube_link):
     if isDownlaodable(youtube_link):
         try:
             with yt_dlp.YoutubeDL({'format': 'bestaudio/best', 'outtmpl': 'uploaded_files/' + uu + '.%(ext)s', "quiet":True, "noplaylist":True}) as ydl:
-                info_dict = ydl.extract_info(youtube_link, download=True)
+                info_dict = ydl.extract_info(youtube_link, download=False)
                 audio_file = ydl.prepare_filename(info_dict)
                 song_name = info_dict['title']
                 duration = info_dict.get('duration',0)  # Get the duration
